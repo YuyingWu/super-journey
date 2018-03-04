@@ -6,6 +6,7 @@ import { Router } from '../routes';
 import Layout from '../components/layout';
 import { LeanCloudResParser } from '../components/utils';
 import AV from '../components/leancloud';
+import Dashboard from '../components/dashboard/dashboard';
 
 export default class extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class extends React.Component {
 
     this.state = {
       username: '无名氏',
-      uid: ''
+      uid: '',
     }
 
     this.logOut = this.logOut.bind(this);
@@ -21,6 +22,7 @@ export default class extends React.Component {
 
   componentDidMount() {
     var currentUser = AV.User.current();
+
     if (currentUser) {
       const { id, username } = LeanCloudResParser(currentUser);
       this.setState({
@@ -56,6 +58,8 @@ export default class extends React.Component {
         <h1>User Information - {username}</h1>
 
         <p onClick={this.logOut}>退出</p>
+
+        <Dashboard />
       </Layout>
     );
   }
