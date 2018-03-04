@@ -46,9 +46,6 @@ export default class extends React.Component {
   render () {
     return (
       <Layout>
-        <style jsx>{`
-        `}</style>
-
         <Helmet>
           <title>Register - 超凡之旅</title>
         </Helmet>

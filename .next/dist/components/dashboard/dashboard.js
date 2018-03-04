@@ -40,8 +40,6 @@ var _travel2 = _interopRequireDefault(_travel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/wyy/Documents/code/super-journey/components/dashboard/dashboard.js';
-
 var SubMenu = _antd.Menu.SubMenu;
 var MenuItemGroup = _antd.Menu.ItemGroup;
 
@@ -80,20 +78,10 @@ var _class = function (_PureComponent) {
 
       switch (tab) {
         case 'travel':
-          content = _react2.default.createElement(_travel2.default, {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 34
-            }
-          });
+          content = _react2.default.createElement(_travel2.default, null);
           break;
         default:
-          content = _react2.default.createElement(_task2.default, {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 37
-            }
-          });
+          content = _react2.default.createElement(_task2.default, null);
       }
 
       return content;
@@ -103,33 +91,11 @@ var _class = function (_PureComponent) {
     value: function render() {
       var tab = this.state.tab;
 
-      return _react2.default.createElement('section', {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 47
-        }
-      }, _react2.default.createElement(_antd.Menu, {
+      return _react2.default.createElement('section', null, _react2.default.createElement(_antd.Menu, {
         onClick: this.handleClick,
         selectedKeys: [tab],
-        mode: 'horizontal',
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 48
-        }
-      }, _react2.default.createElement(_antd.Menu.Item, { key: 'task', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 53
-        }
-      }, '\u4EFB\u52A1'), _react2.default.createElement(_antd.Menu.Item, { key: 'travel', __source: {
-          fileName: _jsxFileName,
-          lineNumber: 56
-        }
-      }, '\u65C5\u884C')), _react2.default.createElement('div', {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 61
-        }
-      }, this.getTab()));
+        mode: 'horizontal'
+      }, _react2.default.createElement(_antd.Menu.Item, { key: 'task' }, '\u4EFB\u52A1'), _react2.default.createElement(_antd.Menu.Item, { key: 'travel' }, '\u65C5\u884C')), _react2.default.createElement('div', null, this.getTab()));
     }
   }]);
 
@@ -137,4 +103,3 @@ var _class = function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.default = _class;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvZGFzaGJvYXJkL2Rhc2hib2FyZC5qcyJdLCJuYW1lcyI6WyJSZWFjdCIsIlB1cmVDb21wb25lbnQiLCJNZW51IiwiVGFzayIsIlRyYXZlbCIsIlN1Yk1lbnUiLCJNZW51SXRlbUdyb3VwIiwiSXRlbUdyb3VwIiwicHJvcHMiLCJzdGF0ZSIsInRhYiIsImhhbmRsZUNsaWNrIiwiYmluZCIsImdldFRhYiIsImRhdGEiLCJrZXkiLCJzZXRTdGF0ZSIsImNvbnRlbnQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFTOzs7O0FBQ2hCLEFBQVM7O0FBQ1QsQUFBTyxBQUFVOzs7O0FBQ2pCLEFBQU8sQUFBWTs7Ozs7Ozs7QUFDbkIsSUFBTSxVQUFVLFdBQWhCLEFBQXFCO0FBQ3JCLElBQU0sZ0JBQWdCLFdBQXRCLEFBQTJCOzs7a0NBR3pCOztrQkFBQSxBQUFZLE9BQU87d0NBQUE7O3NJQUFBLEFBQ1gsQUFFTjs7VUFBQSxBQUFLO1dBQUwsQUFBYSxBQUNOLEFBR1A7QUFKYSxBQUNYOztVQUdGLEFBQUssY0FBYyxNQUFBLEFBQUssWUFBTCxBQUFpQixLQUFwQyxBQUNBO1VBQUEsQUFBSyxTQUFTLE1BQUEsQUFBSyxPQUFMLEFBQVksS0FSVCxBQVFqQjtXQUNEOzs7OztnQ0FFVyxBLE1BQU07VUFBQSxBQUNSLE1BRFEsQUFDQSxLQURBLEFBQ1IsQUFFUjs7V0FBQSxBQUFLO2FBQUwsQUFBYyxBQUNQLEFBRVI7QUFIZSxBQUNaOzs7OzZCQUlLO1VBQUEsQUFDQyxNQUFRLEtBRFQsQUFDYyxNQURkLEFBQ0MsQUFDUjs7VUFBSSxlQUFKLEFBRUE7O2NBQUEsQUFBUSxBQUNOO2FBQUEsQUFBSyxBQUNIO29DQUFVLEFBQUM7O3dCQUFEOzBCQUFWLEFBQVUsQUFDVjtBQURVO0FBQUEsV0FBQTtBQUVaO0FBQ0U7b0NBQVUsQUFBQzs7d0JBQUQ7MEJBTGQsQUFLSSxBQUFVLEFBR2Q7QUFIYztBQUFBLFdBQUE7OzthQUdkLEFBQU8sQUFDUjs7Ozs2QkFFUTtVQUFBLEFBQ0MsTUFBUSxLQURULEFBQ2MsTUFEZCxBQUNDLEFBRVI7OzZCQUNFLGNBQUE7O29CQUFBO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0UsQUFBQztpQkFDVSxLQURYLEFBQ2dCLEFBQ2Q7c0JBQWMsQ0FGaEIsQUFFZ0IsQUFBQyxBQUNmO2NBSEYsQUFHTzs7b0JBSFA7c0JBQUEsQUFLRTtBQUxGO0FBQ0UseUJBSUMsY0FBRCxXQUFBLEFBQU0sUUFBSyxLQUFYLEFBQWU7b0JBQWY7c0JBQUE7QUFBQTtTQUxGLEFBS0UsQUFHQSxpQ0FBQyxjQUFELFdBQUEsQUFBTSxRQUFLLEtBQVgsQUFBZTtvQkFBZjtzQkFBQTtBQUFBO1NBVEosQUFDRSxBQVFFLEFBS0Ysa0NBQUEsY0FBQTs7b0JBQUE7c0JBQUEsQUFDSTtBQURKO0FBQUEsY0FmSixBQUNFLEFBY0UsQUFDSSxBQUFLLEFBSWQ7Ozs7O0FBMUQwQixBIiwiZmlsZSI6ImRhc2hib2FyZC5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvd3l5L0RvY3VtZW50cy9jb2RlL3N1cGVyLWpvdXJuZXkifQ==

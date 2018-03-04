@@ -23,7 +23,7 @@ export default class MyDocument extends Document {
          <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui"/>
          <link href="/static/bootstrap.css" rel="stylesheet" />
          <link href="//at.alicdn.com/t/font_2ddoibpy163nxw29.css" rel="stylesheet" />
-         <link href="//cdnjs.cloudflare.com/ajax/libs/antd/3.2.3/antd.css" rel="stylesheet" />
+         <link href="/static/antd.css" rel="stylesheet" />
          
          <div dangerouslySetInnerHTML={{__html: "<!--[if lt IE 9]><script src=\"/static/html5shiv.js\"></script><script src=\"/static/respond.js\"></script><![endif]-->" }}/>
       

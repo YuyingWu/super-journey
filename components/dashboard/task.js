@@ -123,7 +123,7 @@ export default class extends PureComponent {
 
   renderRecords() {
     const { records } = this.state;
-console.log(records);
+
     return (
       <List
         header={<div>任务打卡</div>}

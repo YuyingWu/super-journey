@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _stringify = require('_babel-runtime@6.26.0@babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _getPrototypeOf = require('_babel-runtime@6.26.0@babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -34,21 +38,15 @@ var _link2 = _interopRequireDefault(_link);
 
 var _reactHelmet = require('react-helmet');
 
-var _routes = require('../routes');
-
 var _layout = require('../components/layout');
 
 var _layout2 = _interopRequireDefault(_layout);
-
-var _utils = require('../components/utils');
 
 var _leancloud = require('../components/leancloud');
 
 var _leancloud2 = _interopRequireDefault(_leancloud);
 
-var _dashboard = require('../components/dashboard/dashboard');
-
-var _dashboard2 = _interopRequireDefault(_dashboard);
+var _routes = require('../routes');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60,52 +58,54 @@ var _class = function (_React$Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (_class.__proto__ || (0, _getPrototypeOf2.default)(_class)).call(this, props));
 
-    _this.state = {
-      username: '无名氏',
-      uid: ''
-    };
-
-    _this.logOut = _this.logOut.bind(_this);
+    _this.submit = _this.submit.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(_class, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var currentUser = _leancloud2.default.User.current();
+    key: 'submit',
+    value: function submit() {
+      var usernameValue = this.username.value,
+          passwordValue = this.password.value;
 
-      if (currentUser) {
-        var _LeanCloudResParser = (0, _utils.LeanCloudResParser)(currentUser),
-            id = _LeanCloudResParser.id,
-            username = _LeanCloudResParser.username;
-
-        this.setState({
-          username: username,
-          uid: id
-        });
-      } else {
-        _routes.Router.push('/login');
+      if (!usernameValue || !passwordValue) {
+        alert('Incorrect username or password!');
+        return;
       }
-    }
-  }, {
-    key: 'logOut',
-    value: function logOut() {
-      _leancloud2.default.User.logOut();
 
-      setTimeout(function () {
-        _routes.Router.push('/login');
-      }, 1500);
+      // 新建 AVUser 对象实例
+      var user = new _leancloud2.default.User();
+      // 设置用户名
+      user.setUsername(usernameValue);
+      // 设置密码
+      user.setPassword(passwordValue);
+
+      user.signUp().then(function (loginedUser) {
+        alert('Register successfully!');
+
+        setTimeout(function () {
+          _routes.Router.push('/user');
+        }, 1500);
+        // console.log(loginedUser);
+        // Router.pushRoute('/user');
+      }, function (error) {
+        alert('error: ' + (0, _stringify2.default)(error));
+      });
     }
   }, {
     key: 'render',
     value: function render() {
-      var username = this.state.username;
+      var _this2 = this;
 
-      return _react2.default.createElement(_layout2.default, null, _react2.default.createElement(_reactHelmet.Helmet, null, _react2.default.createElement('title', null, 'User - \u8D85\u51E1\u4E4B\u65C5')), _react2.default.createElement('h1', null, 'User Information - ', username), _react2.default.createElement('p', { onClick: this.logOut }, '\u9000\u51FA'), _react2.default.createElement(_dashboard2.default, null));
+      return _react2.default.createElement(_layout2.default, null, _react2.default.createElement(_reactHelmet.Helmet, null, _react2.default.createElement('title', null, 'Register - \u8D85\u51E1\u4E4B\u65C5')), _react2.default.createElement('h1', null, 'Register'), _react2.default.createElement('form', null, _react2.default.createElement('label', null, 'User name:', _react2.default.createElement('input', { type: 'text', ref: function ref(_ref) {
+          return _this2.username = _ref;
+        } })), _react2.default.createElement('label', null, 'Password:', _react2.default.createElement('input', { type: 'password', ref: function ref(_ref2) {
+          return _this2.password = _ref2;
+        } })), _react2.default.createElement('p', { role: 'submit', className: 'btn btn-primary', onClick: this.submit }, 'Register')));
     }
   }]);
 
   return _class;
 }(_react2.default.Component);
-// import AV from 'leancloud-storage';
+
 exports.default = _class;

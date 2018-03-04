@@ -17,11 +17,11 @@ app.prepare()
 .then(() => {
   const server = express()
 
-  server.get('/archives/:id', (req, res) => {
-    const actualPage = '/post'
-    const queryParams = { slug: req.params.id } 
-    app.render(req, res, actualPage, queryParams)
-  })
+  // server.get('/', (req, res) => {
+  //   const actualPage = '/user'
+  //   // const queryParams = { slug: req.params.id } 
+  //   app.render(req, res, actualPage, {}})
+  // })
 
   server.get('*', (req, res) => {
     return handle(req, res)
