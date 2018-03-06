@@ -30,6 +30,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import { getScore } from '../apis';
+
 var _class = function (_PureComponent) {
   (0, _inherits3.default)(_class, _PureComponent);
 
@@ -41,8 +43,37 @@ var _class = function (_PureComponent) {
 
   (0, _createClass3.default)(_class, [{
     key: 'render',
+
+    // constructor(props) {
+    //   super(props);
+
+    //   this.state = {
+    //     physical: 0,
+    //     wisdom: 0,
+    //     mileage: 0
+    //   };
+
+    //   this.fetchUserScore = this.fetchUserScore.bind(this);
+    // }
+
+    // componentWillMount() {
+    //   this.fetchUserScore();
+    // }
+
+    // async fetchUserScore() {
+    //   const { physical, wisdom, mileage } = await getScore();
+
+    //   this.setState({
+    //     physical,
+    //     wisdom,
+    //     mileage,
+    //   });
+    // }
+
     value: function render() {
-      return _react2.default.createElement('div', null, '\u65C5\u884C');
+      // const { physical, wisdom, mileage } = this.state;
+
+      return _react2.default.createElement('div', null, 'Travel');
     }
   }]);
 

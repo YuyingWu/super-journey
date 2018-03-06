@@ -52,9 +52,9 @@ export default class extends React.Component {
           <title>User - 超凡之旅</title>
         </Helmet>
 
-        <h1>User Information - {username}</h1>
-
-        <p onClick={this.logOut}>退出</p>
+        <h1>超凡之旅<p onClick={this.logOut} className="text-right" style={{
+          fontSize: 12
+        }}>退出</p></h1>
 
         <Dashboard />
       </Layout>

@@ -4,13 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _assign = require('_babel-runtime@6.26.0@babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
 var _toConsumableArray2 = require('_babel-runtime@6.26.0@babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-var _assign = require('_babel-runtime@6.26.0@babel-runtime/core-js/object/assign');
+var _regenerator = require('_babel-runtime@6.26.0@babel-runtime/regenerator');
 
-var _assign2 = _interopRequireDefault(_assign);
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('_babel-runtime@6.26.0@babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _getPrototypeOf = require('_babel-runtime@6.26.0@babel-runtime/core-js/object/get-prototype-of');
 
@@ -44,12 +52,9 @@ var _leancloud2 = _interopRequireDefault(_leancloud);
 
 var _utils = require('../utils');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _apis = require('../apis');
 
-var Header = _antd.Layout.Header,
-    Content = _antd.Layout.Content,
-    Footer = _antd.Layout.Footer,
-    Sider = _antd.Layout.Sider;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var moment = require('moment');
 
@@ -77,22 +82,46 @@ var _class = function (_PureComponent) {
   (0, _createClass3.default)(_class, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
-
-      var currentUser = _leancloud2.default.User.current();
-
-      if (currentUser) {
-        var _LeanCloudResParser = (0, _utils.LeanCloudResParser)(currentUser),
-            id = _LeanCloudResParser.id;
-
-        this.setState({
-          uid: id
-        }, function () {
-          _this2.fetchTaskList();
-          _this2.fetchGameLog();
-        });
-      }
+      this.init();
     }
+  }, {
+    key: 'init',
+    value: function () {
+      var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+        var _this2 = this;
+
+        var uid;
+        return _regenerator2.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return (0, _apis.getUid)();
+
+              case 2:
+                uid = _context.sent;
+
+                this.setState({
+                  uid: uid
+                }, function () {
+                  _this2.fetchTaskList();
+                  _this2.fetchGameLog();
+                });
+
+              case 4:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function init() {
+        return _ref.apply(this, arguments);
+      }
+
+      return init;
+    }()
   }, {
     key: 'fetchTaskList',
     value: function fetchTaskList() {
@@ -114,36 +143,43 @@ var _class = function (_PureComponent) {
     }
   }, {
     key: 'fetchGameLog',
-    value: function fetchGameLog() {
-      var _this4 = this;
+    value: function () {
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+        var list;
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return (0, _apis.getRecords)();
 
-      var uid = this.state.uid;
+              case 2:
+                list = _context2.sent;
 
-      var query = new _leancloud2.default.Query('Game');
-      var User = _leancloud2.default.Object.createWithoutData('_User', uid);
+                if (list && list.length) {
+                  this.setState({
+                    records: [].concat((0, _toConsumableArray3.default)(list))
+                  });
+                }
 
-      query.equalTo('user', User);
-      query.include(['task']);
-      query.descending('createdAt');
+              case 4:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
 
-      query.find().then(function (results) {
-        var list = [];
+      function fetchGameLog() {
+        return _ref2.apply(this, arguments);
+      }
 
-        results.map(function (r) {
-          list.push((0, _assign2.default)((0, _utils.LeanCloudResParser)(r.attributes.task), {
-            createdAt: r.createdAt
-          }));
-        });
-
-        _this4.setState({
-          records: [].concat(list)
-        });
-      }, function (error) {});
-    }
+      return fetchGameLog;
+    }()
   }, {
     key: 'claimTask',
     value: function claimTask(task) {
-      var _this5 = this;
+      var _this4 = this;
 
       var uid = this.state.uid;
 
@@ -158,10 +194,10 @@ var _class = function (_PureComponent) {
         if (results) {
           _antd.message.info('提交成功');
 
-          _this5.setState({
+          _this4.setState({
             records: [(0, _assign2.default)(task, {
               createdAt: moment()
-            })].concat((0, _toConsumableArray3.default)(_this5.state.records))
+            })].concat((0, _toConsumableArray3.default)(_this4.state.records))
           });
         }
       });
@@ -169,7 +205,7 @@ var _class = function (_PureComponent) {
   }, {
     key: 'renderTask',
     value: function renderTask() {
-      var _this6 = this;
+      var _this5 = this;
 
       var tasks = this.state.tasks;
 
@@ -180,7 +216,7 @@ var _class = function (_PureComponent) {
         dataSource: tasks,
         renderItem: function renderItem(item) {
           return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('p', null, item.name, '\uFF1A\u4F53\u529B\u503C', item.physical, '\uFF0C\u7CBE\u795E\u503C', item.wisdom, '\uFF0C\u91CC\u7A0B', item.mileage, _react2.default.createElement(_antd.Button, { type: 'primary', onClick: function onClick() {
-              return _this6.claimTask(item);
+              return _this5.claimTask(item);
             } }, '\u5B8C\u6210')));
         }
       });
@@ -207,7 +243,7 @@ var _class = function (_PureComponent) {
           tasks = _state.tasks,
           records = _state.records;
 
-      return _react2.default.createElement('div', null, _react2.default.createElement(_antd.Layout, null, _react2.default.createElement(Sider, { width: 300, style: { background: '#fff' } }, records.length ? this.renderRecords() : null), _react2.default.createElement(Content, { style: { padding: '0 24px', minHeight: 280 } }, _react2.default.createElement('div', null, tasks.length ? this.renderTask() : null))));
+      return _react2.default.createElement('div', null, _react2.default.createElement(_antd.Row, null, _react2.default.createElement(_antd.Col, { lg: 12, md: 12, xs: 24 }, records.length ? this.renderRecords() : null), _react2.default.createElement(_antd.Col, { lg: 12, md: 12, xs: 24 }, _react2.default.createElement('div', null, tasks.length ? this.renderTask() : null))));
     }
   }]);
 

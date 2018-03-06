@@ -65,10 +65,10 @@ var MyDocument = function (_Document) {
       var bodyAttrs = helmet.bodyAttributes.toComponent();
 
       return _react2.default.createElement('html', (0, _extends3.default)({ lang: 'zh-CN' }, htmlAttrs), _react2.default.createElement(_document.Head, null, _react2.default.createElement('title', null, '\u8D85\u51E1\u4E4B\u65C5'), _react2.default.createElement('meta', { charSet: 'utf-8' }), _react2.default.createElement('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' }), _react2.default.createElement('meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,minimal-ui' }), _react2.default.createElement('link', { href: '/static/bootstrap.css', rel: 'stylesheet' }), _react2.default.createElement('link', { href: '//at.alicdn.com/t/font_2ddoibpy163nxw29.css', rel: 'stylesheet' }), _react2.default.createElement('link', { href: '/static/antd.css', rel: 'stylesheet' }), _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: "<!--[if lt IE 9]><script src=\"/static/html5shiv.js\"></script><script src=\"/static/respond.js\"></script><![endif]-->" } }), helmet.title.toComponent(), helmet.meta.toComponent(), helmet.link.toComponent()), _react2.default.createElement('body', (0, _extends3.default)({}, bodyAttrs, {
-        className: 'jsx-3958856833' + ' ' + (bodyAttrs.className != null && bodyAttrs.className || '')
+        className: 'jsx-4043581549' + ' ' + (bodyAttrs.className != null && bodyAttrs.className || '')
       }), _react2.default.createElement(_style2.default, {
-        styleId: '3958856833',
-        css: ['html{font-size:62.5%!important;}', 'body{font-size:1.4rem!important;}']
+        styleId: '4043581549',
+        css: ['html{font-size:62.5%!important;}', 'body{font-size:1.4rem!important;}', '.container{padding-top:15px;}']
       }), _react2.default.createElement(_document.Main, null), _react2.default.createElement(_document.NextScript, null)));
     }
   }], [{

@@ -24,6 +24,10 @@ var _inherits2 = require('_babel-runtime@6.26.0@babel-runtime/helpers/inherits')
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _style = require('_styled-jsx@2.2.1@styled-jsx/style.js');
+
+var _style2 = _interopRequireDefault(_style);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -37,6 +41,10 @@ var _task2 = _interopRequireDefault(_task);
 var _travel = require('./travel');
 
 var _travel2 = _interopRequireDefault(_travel);
+
+var _userInfo = require('../user-info');
+
+var _userInfo2 = _interopRequireDefault(_userInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -91,11 +99,19 @@ var _class = function (_PureComponent) {
     value: function render() {
       var tab = this.state.tab;
 
-      return _react2.default.createElement('section', null, _react2.default.createElement(_antd.Menu, {
+      return _react2.default.createElement('section', {
+        className: 'jsx-1695625990'
+      }, _react2.default.createElement(_style2.default, {
+        styleId: '1695625990',
+        css: ['.wgt-menu{margin-bottom:10px;}']
+      }), _react2.default.createElement(_antd.Row, null, _react2.default.createElement(_antd.Col, { lg: 4, md: 12, xs: 24 }, _react2.default.createElement(_userInfo2.default, null)), _react2.default.createElement(_antd.Col, { lg: 20, md: 12, xs: 24 }, _react2.default.createElement('div', {
+        className: 'jsx-1695625990'
+      }, _react2.default.createElement(_antd.Menu, {
         onClick: this.handleClick,
         selectedKeys: [tab],
-        mode: 'horizontal'
-      }, _react2.default.createElement(_antd.Menu.Item, { key: 'task' }, '\u4EFB\u52A1'), _react2.default.createElement(_antd.Menu.Item, { key: 'travel' }, '\u65C5\u884C')), _react2.default.createElement('div', null, this.getTab()));
+        mode: 'horizontal',
+        className: 'wgt-menu'
+      }, _react2.default.createElement(_antd.Menu.Item, { key: 'task' }, '\u4EFB\u52A1'), _react2.default.createElement(_antd.Menu.Item, { key: 'travel' }, '\u7528\u6237\u4FE1\u606F')), this.getTab()))));
     }
   }]);
 

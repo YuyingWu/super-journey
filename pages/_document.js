@@ -39,6 +39,9 @@ export default class MyDocument extends Document {
           body{
             font-size: 1.4rem!important;
           }
+          .container{
+            padding-top: 15px;
+          }
         `}</style>
          <Main />
          <NextScript />

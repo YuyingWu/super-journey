@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Layout, Button, List, message } from 'antd';
+import { Button, List, message, Row, Col } from 'antd';
 import AV from '../leancloud';
 import { LeanCloudResParser } from '../utils';
-const { Header, Content, Footer, Sider } = Layout;
+import { getUid, getRecords } from '../apis';
 const moment = require('moment');
 
 export default class extends PureComponent {
@@ -22,18 +22,18 @@ export default class extends PureComponent {
   }
 
   componentWillMount() {
-    const currentUser = AV.User.current();
+    this.init();
+  }
 
-    if (currentUser) {
-      const { id } = LeanCloudResParser(currentUser);
+  async init() {
+    const uid = await getUid();
 
-      this.setState({
-        uid: id,
-      }, () => {
-        this.fetchTaskList();
-        this.fetchGameLog();
-      });
-    }
+    this.setState({
+      uid,
+    }, () => {
+      this.fetchTaskList();
+      this.fetchGameLog();
+    });
   }
 
   fetchTaskList() {
@@ -53,29 +53,14 @@ export default class extends PureComponent {
     });
   }
 
-  fetchGameLog() {
-    const { uid } = this.state;
-    const query = new AV.Query('Game');
-    const User = AV.Object.createWithoutData('_User', uid);
+  async fetchGameLog() {
+    const list = await getRecords();
 
-    query.equalTo('user', User);
-    query.include(['task']);
-    query.descending('createdAt');
-
-    query.find().then(results => {
-      let list = [];
-
-      results.map(r => {
-        list.push(Object.assign(LeanCloudResParser(r.attributes.task), {
-          createdAt: r.createdAt
-        }));
-      });
-
+    if (list && list.length) {
       this.setState({
         records: [...list]
       });
-    }, function (error) {
-    });
+    }
   }
 
   claimTask(task) {
@@ -152,17 +137,16 @@ export default class extends PureComponent {
 
     return (
       <div>
-        <Layout>
-          <Sider width={300} style={{ background: '#fff' }}>
+        <Row>
+          <Col lg={12} md={12} xs={24}>
             { records.length ? this.renderRecords() : null }
-          </Sider>
-
-          <Content style={{ padding: '0 24px', minHeight: 280 }}>
+          </Col>
+          <Col lg={12} md={12} xs={24}>
             <div>
               { tasks.length ? this.renderTask() : null }
             </div>
-          </Content>
-        </Layout>
+          </Col>
+        </Row>
       </div>
     );
   }

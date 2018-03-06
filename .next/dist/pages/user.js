@@ -101,7 +101,9 @@ var _class = function (_React$Component) {
     value: function render() {
       var username = this.state.username;
 
-      return _react2.default.createElement(_layout2.default, null, _react2.default.createElement(_reactHelmet.Helmet, null, _react2.default.createElement('title', null, 'User - \u8D85\u51E1\u4E4B\u65C5')), _react2.default.createElement('h1', null, 'User Information - ', username), _react2.default.createElement('p', { onClick: this.logOut }, '\u9000\u51FA'), _react2.default.createElement(_dashboard2.default, null));
+      return _react2.default.createElement(_layout2.default, null, _react2.default.createElement(_reactHelmet.Helmet, null, _react2.default.createElement('title', null, 'User - \u8D85\u51E1\u4E4B\u65C5')), _react2.default.createElement('h1', null, '\u8D85\u51E1\u4E4B\u65C5', _react2.default.createElement('p', { onClick: this.logOut, className: 'text-right', style: {
+          fontSize: 12
+        } }, '\u9000\u51FA')), _react2.default.createElement(_dashboard2.default, null));
     }
   }]);
 
