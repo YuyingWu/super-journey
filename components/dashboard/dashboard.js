@@ -67,7 +67,7 @@ export default class extends PureComponent {
                   任务
                 </Menu.Item>
                 <Menu.Item key="travel">
-                  用户信息
+                  旅行
                 </Menu.Item>
               </Menu>
               { this.getTab() }

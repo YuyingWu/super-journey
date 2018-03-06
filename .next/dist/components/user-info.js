@@ -54,7 +54,10 @@ var _class = function (_PureComponent) {
       username: '',
       physical: 0,
       wisdom: 0,
-      mileage: 0
+      mileage: 0,
+      level: 1,
+      levelPhysical: 100,
+      levelWisdom: 100
     };
     return _this;
   }
@@ -64,6 +67,7 @@ var _class = function (_PureComponent) {
     value: function componentWillMount() {
       this.fetchUserData();
       this.fetchUserScore();
+      this.fetchUserLevel();
     }
   }, {
     key: 'fetchUserData',
@@ -139,15 +143,57 @@ var _class = function (_PureComponent) {
       return fetchUserScore;
     }()
   }, {
+    key: 'fetchUserLevel',
+    value: function () {
+      var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+        var _ref5, level, levelPhysical, levelWisdom;
+
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return (0, _apis.getUserLevel)();
+
+              case 2:
+                _ref5 = _context3.sent;
+                level = _ref5.level;
+                levelPhysical = _ref5.physical;
+                levelWisdom = _ref5.wisdom;
+
+                this.setState({
+                  level: level,
+                  levelPhysical: levelPhysical,
+                  levelWisdom: levelWisdom
+                });
+
+              case 7:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function fetchUserLevel() {
+        return _ref4.apply(this, arguments);
+      }
+
+      return fetchUserLevel;
+    }()
+  }, {
     key: 'render',
     value: function render() {
       var _state = this.state,
           username = _state.username,
           physical = _state.physical,
           wisdom = _state.wisdom,
-          mileage = _state.mileage;
+          mileage = _state.mileage,
+          level = _state.level,
+          levelPhysical = _state.levelPhysical,
+          levelWisdom = _state.levelWisdom;
 
-      return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, username), _react2.default.createElement('div', { style: { width: 170 } }, '\u4F53\u529B\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: physical }), '\u7CBE\u795E\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: wisdom }), '\u91CC\u7A0B\u6570\uFF1A', _react2.default.createElement(_antd.Progress, { percent: mileage })));
+      return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, username), _react2.default.createElement('p', null, '\u7B49\u7EA7\uFF1ALv.', level), _react2.default.createElement('div', { style: { width: 170 } }, '\u4F53\u529B\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: physical / levelPhysical * 100 }), '\u7CBE\u795E\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: wisdom / levelWisdom * 100 }), '\u91CC\u7A0B\u6570\uFF1A', _react2.default.createElement(_antd.Progress, { percent: mileage / 50 * 100 })));
     }
   }]);
 

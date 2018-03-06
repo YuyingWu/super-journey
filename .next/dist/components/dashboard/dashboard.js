@@ -111,7 +111,7 @@ var _class = function (_PureComponent) {
         selectedKeys: [tab],
         mode: 'horizontal',
         className: 'wgt-menu'
-      }, _react2.default.createElement(_antd.Menu.Item, { key: 'task' }, '\u4EFB\u52A1'), _react2.default.createElement(_antd.Menu.Item, { key: 'travel' }, '\u7528\u6237\u4FE1\u606F')), this.getTab()))));
+      }, _react2.default.createElement(_antd.Menu.Item, { key: 'task' }, '\u4EFB\u52A1'), _react2.default.createElement(_antd.Menu.Item, { key: 'travel' }, '\u65C5\u884C')), this.getTab()))));
     }
   }]);
 

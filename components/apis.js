@@ -71,3 +71,87 @@ export const getScore =  async () => {
 
   return score;
 }
+
+// 获取用户等级信息
+export const getUserLevel = async () => {
+  const score = await getScore();
+  const { physical, wisdom } = score;
+  let levelList = [];
+  let userLevel = {
+    level: 1,
+    physical: 100,
+    wisdom: 100
+  };
+
+  const query = new AV.Query('Level');
+
+  return query.find().then(res => {
+    res.map(r => {
+      levelList.push(LeanCloudResParser(r));
+    });
+
+    levelList.map(item => {
+      const { level, physical: levelPhysical, wisdom: levelWisdom } = item;
+
+      switch(level) {
+        case 2:
+          if (physical > levelPhysical && wisdom > levelWisdom) {
+            userLevel = {
+              level,
+              physical: levelPhysical,
+              wisdom: levelWisdom
+            };
+          }
+          break;
+      }
+    });
+
+    return userLevel;
+  });
+}
+
+// 设置当前交通工具
+export const setVehicle = async (vehicle) => {
+  const uid = await getUid();
+  const User = AV.Object.createWithoutData('_User', uid);
+  // const VehicleList = await getVehicleList(vehicle);
+  // const v = AV.Object.createWithoutData('Vehicle', VehicleList[0].id);
+
+  User.set('vehicle', vehicle);
+
+  User.save().then(() => {
+    console.log('set vehicle successfully!');
+  });
+}
+
+// 获取所有交通工具
+export const getVehicleList = (type) => {
+  const query = new AV.Query('Vehicle');
+
+  if (type) {
+    query.equalTo('key', type);
+  }
+
+  return query.find().then(results => {
+    let list = [];
+
+    results.map(r => {
+      list.push(LeanCloudResParser(r));
+    });
+
+    return list;
+  });
+}
+
+// 获取我的交通工具
+export const getMyVehicle = async () => {
+  const uid = await getUid();
+  const query = new AV.Query('_User');
+
+  return query.get(uid).then(user => {
+    return {
+      vehicle: user.get('vehicle'),
+      garage: user.get('garage')
+    };
+  });
+}

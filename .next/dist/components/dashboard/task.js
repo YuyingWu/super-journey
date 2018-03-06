@@ -215,8 +215,10 @@ var _class = function (_PureComponent) {
         bordered: true,
         dataSource: tasks,
         renderItem: function renderItem(item) {
-          return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('p', null, item.name, '\uFF1A\u4F53\u529B\u503C', item.physical, '\uFF0C\u7CBE\u795E\u503C', item.wisdom, '\uFF0C\u91CC\u7A0B', item.mileage, _react2.default.createElement(_antd.Button, { type: 'primary', onClick: function onClick() {
+          return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('p', null, item.name, '\uFF1A', item.physical ? '\u4F53\u529B\u503C' + item.physical : null, item.wisdom ? '\uFF0C\u7CBE\u795E\u503C' + item.wisdom : null, item.mileage ? '\uFF0C\u91CC\u7A0B' + item.mileage : null, _react2.default.createElement(_antd.Button, { type: 'primary', onClick: function onClick() {
               return _this5.claimTask(item);
+            }, style: {
+              marginLeft: 10
             } }, '\u5B8C\u6210')));
         }
       });

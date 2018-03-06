@@ -97,8 +97,13 @@ export default class extends PureComponent {
         renderItem={item => (
           <List.Item>
             <p>
-              { item.name }：体力值{item.physical}，精神值{item.wisdom}，里程{item.mileage} 
-              <Button type="primary" onClick={() => this.claimTask(item)}>完成</Button>
+              { item.name }：
+              { item.physical ? `体力值${item.physical}` : null}
+              { item.wisdom ? `，精神值${item.wisdom}` : null}
+              { item.mileage ? `，里程${item.mileage}` : null}
+              <Button type="primary" onClick={() => this.claimTask(item)} style={{
+                marginLeft: 10
+              }}>完成</Button>
             </p>
           </List.Item>
         )}
