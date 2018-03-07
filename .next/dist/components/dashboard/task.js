@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _keys = require('_babel-runtime@6.26.0@babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _assign = require('_babel-runtime@6.26.0@babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
@@ -57,6 +61,7 @@ var _apis = require('../apis');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var moment = require('moment');
+var Option = _antd.Select.Option;
 
 var _class = function (_PureComponent) {
   (0, _inherits3.default)(_class, _PureComponent);
@@ -69,7 +74,8 @@ var _class = function (_PureComponent) {
     _this.state = {
       tasks: [],
       uid: '',
-      records: []
+      records: [],
+      groupTasks: {}
     };
 
     _this.renderTask = _this.renderTask.bind(_this);
@@ -83,6 +89,10 @@ var _class = function (_PureComponent) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.init();
+
+      this.groupTask();
+
+      (0, _apis.setVehicle)('foot');
     }
   }, {
     key: 'init',
@@ -124,43 +134,22 @@ var _class = function (_PureComponent) {
     }()
   }, {
     key: 'fetchTaskList',
-    value: function fetchTaskList() {
-      var _this3 = this;
-
-      var query = new _leancloud2.default.Query('Task');
-
-      query.find().then(function (results) {
-        var data = [];
-
-        results.map(function (r) {
-          data.push((0, _utils.LeanCloudResParser)(r));
-        });
-
-        _this3.setState({
-          tasks: [].concat(data)
-        });
-      }, function (error) {});
-    }
-  }, {
-    key: 'fetchGameLog',
     value: function () {
       var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-        var list;
+        var data;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return (0, _apis.getRecords)();
+                return (0, _apis.getTaskList)();
 
               case 2:
-                list = _context2.sent;
+                data = _context2.sent;
 
-                if (list && list.length) {
-                  this.setState({
-                    records: [].concat((0, _toConsumableArray3.default)(list))
-                  });
-                }
+                this.setState({
+                  tasks: [].concat((0, _toConsumableArray3.default)(data))
+                });
 
               case 4:
               case 'end':
@@ -170,17 +159,90 @@ var _class = function (_PureComponent) {
         }, _callee2, this);
       }));
 
-      function fetchGameLog() {
+      function fetchTaskList() {
         return _ref2.apply(this, arguments);
+      }
+
+      return fetchTaskList;
+    }()
+  }, {
+    key: 'groupTask',
+    value: function () {
+      var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+        var group;
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return (0, _apis.getGroupTaskList)();
+
+              case 2:
+                group = _context3.sent;
+
+                this.setState({
+                  groupTasks: group
+                });
+
+              case 4:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function groupTask() {
+        return _ref3.apply(this, arguments);
+      }
+
+      return groupTask;
+    }()
+  }, {
+    key: 'fetchGameLog',
+    value: function () {
+      var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+        var list;
+        return _regenerator2.default.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return (0, _apis.getRecords)();
+
+              case 2:
+                list = _context4.sent;
+
+                if (list && list.length) {
+                  this.setState({
+                    records: [].concat((0, _toConsumableArray3.default)(list))
+                  });
+                }
+
+              case 4:
+              case 'end':
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function fetchGameLog() {
+        return _ref4.apply(this, arguments);
       }
 
       return fetchGameLog;
     }()
   }, {
     key: 'claimTask',
-    value: function claimTask(task) {
-      var _this4 = this;
+    value: function claimTask(id) {
+      var _this3 = this;
 
+      var tasks = this.state.tasks;
+
+      var task = tasks.find(function (t) {
+        return t.id === id;
+      });
       var uid = this.state.uid;
 
       var User = _leancloud2.default.Object.createWithoutData('_User', uid);
@@ -194,10 +256,10 @@ var _class = function (_PureComponent) {
         if (results) {
           _antd.message.info('提交成功');
 
-          _this4.setState({
+          _this3.setState({
             records: [(0, _assign2.default)(task, {
               createdAt: moment()
-            })].concat((0, _toConsumableArray3.default)(_this4.state.records))
+            })].concat((0, _toConsumableArray3.default)(_this3.state.records))
           });
         }
       });
@@ -205,21 +267,31 @@ var _class = function (_PureComponent) {
   }, {
     key: 'renderTask',
     value: function renderTask() {
-      var _this5 = this;
+      var _this4 = this;
 
-      var tasks = this.state.tasks;
+      var groupTasks = this.state.groupTasks;
+
+      var keys = (0, _keys2.default)(groupTasks);
+      var groupArray = [];
+
+      keys.map(function (key) {
+        groupArray.push({
+          key: key,
+          list: groupTasks[key]
+        });
+      });
 
       return _react2.default.createElement(_antd.List, {
         header: _react2.default.createElement('div', null, '\u4EFB\u52A1\u4E2D\u5FC3'),
         footer: _react2.default.createElement('div', null, '\u9009\u62E9\u4F60\u9700\u8981\u786E\u8BA4\u7684\u4EFB\u52A1\uFF0C\u5E76\u70B9\u51FB\u201C\u5B8C\u6210\u201D'),
         bordered: true,
-        dataSource: tasks,
+        dataSource: groupArray,
         renderItem: function renderItem(item) {
-          return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('p', null, item.name, '\uFF1A', item.physical ? '\u4F53\u529B\u503C' + item.physical : null, item.wisdom ? '\uFF0C\u7CBE\u795E\u503C' + item.wisdom : null, item.mileage ? '\uFF0C\u91CC\u7A0B' + item.mileage : null, _react2.default.createElement(_antd.Button, { type: 'primary', onClick: function onClick() {
-              return _this5.claimTask(item);
-            }, style: {
-              marginLeft: 10
-            } }, '\u5B8C\u6210')));
+          return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('div', { style: {
+              display: 'block'
+            } }, _react2.default.createElement('h1', null, item.key), _react2.default.createElement('br', null), _react2.default.createElement(_antd.Select, { defaultValue: '\u8BF7\u9009\u62E9', style: { width: 240 }, onChange: _this4.claimTask }, item.list.map(function (task) {
+            return _react2.default.createElement(Option, { value: task.id, key: 'select-' + task.id }, task.name, '\uFF08', task.physical ? '\u4F53\u529B\u503C' + task.physical + ' ' : null, task.wisdom ? '\u7CBE\u795E\u503C' + task.wisdom + ' ' : null, task.mileage ? '\u91CC\u7A0B' + task.mileage : null, '\uFF09');
+          }))));
         }
       });
     }

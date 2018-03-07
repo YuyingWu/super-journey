@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Button, List, message, Row, Col } from 'antd';
+import { Button, List, message, Row, Col, Select } from 'antd';
 import AV from '../leancloud';
 import { LeanCloudResParser } from '../utils';
-import { getUid, getRecords } from '../apis';
+import { getUid, getRecords, getTaskList, getGroupTaskList, setVehicle } from '../apis';
 const moment = require('moment');
+const Option = Select.Option;
 
 export default class extends PureComponent {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class extends PureComponent {
     this.state = {
       tasks: [],
       uid: '',
-      records: []
+      records: [],
+      groupTasks: {}
     }
 
     this.renderTask = this.renderTask.bind(this);
@@ -23,6 +25,10 @@ export default class extends PureComponent {
 
   componentWillMount() {
     this.init();
+
+    this.groupTask();
+
+    setVehicle('foot');
   }
 
   async init() {
@@ -36,20 +42,19 @@ export default class extends PureComponent {
     });
   }
 
-  fetchTaskList() {
-    const query = new AV.Query('Task');
+  async fetchTaskList() {
+    const data = await getTaskList();
 
-    query.find().then(results => {
-      let data = [];
+    this.setState({
+      tasks: [...data]
+    });
+  }
 
-      results.map(r => {
-        data.push(LeanCloudResParser(r));
-      })
+  async groupTask() {
+    const group = await getGroupTaskList();
 
-      this.setState({
-        tasks: [...data]
-      });
-    }, function (error) {
+    this.setState({
+      groupTasks: group
     });
   }
 
@@ -63,7 +68,9 @@ export default class extends PureComponent {
     }
   }
 
-  claimTask(task) {
+  claimTask(id) {
+    const { tasks } = this.state;
+    const task = tasks.find(t => t.id === id);
     const { uid } = this.state;
     const User = AV.Object.createWithoutData('_User', uid);
     const Task = AV.Object.createWithoutData('Task', task.id);
@@ -86,25 +93,38 @@ export default class extends PureComponent {
   }
 
   renderTask() {
-    const { tasks } = this.state;
+    const { groupTasks } = this.state;
+    const keys = Object.keys(groupTasks);
+    let groupArray = [];
+
+    keys.map(key => {
+      groupArray.push({
+        key: key,
+        list: groupTasks[key]
+      });
+    });
 
     return (
       <List
         header={<div>任务中心</div>}
         footer={<div>选择你需要确认的任务，并点击“完成”</div>}
         bordered
-        dataSource={tasks}
+        dataSource={groupArray}
         renderItem={item => (
           <List.Item>
-            <p>
-              { item.name }：
-              { item.physical ? `体力值${item.physical}` : null}
-              { item.wisdom ? `，精神值${item.wisdom}` : null}
-              { item.mileage ? `，里程${item.mileage}` : null}
-              <Button type="primary" onClick={() => this.claimTask(item)} style={{
-                marginLeft: 10
-              }}>完成</Button>
-            </p>
+            <div style={{
+              display: 'block'
+            }}>
+              <h1>{item.key}</h1><br/>
+
+              <Select defaultValue="请选择" style={{ width: 240 }} onChange={this.claimTask}>
+                { item.list.map(task => (
+                  <Option value={task.id} key={`select-${task.id}`}>{ task.name }（{ task.physical ? `体力值${task.physical} ` : null}
+                  { task.wisdom ? `精神值${task.wisdom} ` : null}
+                  { task.mileage ? `里程${task.mileage}` : null}）</Option>
+                ))}
+              </Select>
+            </div>
           </List.Item>
         )}
       />

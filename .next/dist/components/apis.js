@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMyVehicle = exports.getVehicleList = exports.setVehicle = exports.getUserLevel = exports.getScore = exports.getRecords = exports.getUid = exports.getUser = undefined;
+exports.getGroupTaskList = exports.getTaskList = exports.getMyVehicle = exports.getVehicleList = exports.setVehicle = exports.getUserLevel = exports.getScore = exports.getRecords = exports.getUid = exports.getUser = undefined;
 
 var _regenerator = require('_babel-runtime@6.26.0@babel-runtime/regenerator');
 
@@ -290,5 +290,57 @@ var getMyVehicle = exports.getMyVehicle = function () {
 
   return function getMyVehicle() {
     return _ref5.apply(this, arguments);
+  };
+}();
+
+// task list
+var getTaskList = exports.getTaskList = function getTaskList() {
+  var query = new _leancloud2.default.Query('Task');
+
+  return query.find().then(function (results) {
+    var data = [];
+
+    results.map(function (r) {
+      data.push((0, _utils.LeanCloudResParser)(r));
+    });
+
+    return data;
+  }, function (error) {});
+};
+
+var getGroupTaskList = exports.getGroupTaskList = function () {
+  var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
+    var list, group;
+    return _regenerator2.default.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.next = 2;
+            return getTaskList();
+
+          case 2:
+            list = _context6.sent;
+            group = {};
+
+            list.map(function (item) {
+              if (!group[item.group]) {
+                group[item.group] = [];
+              }
+
+              group[item.group].push(item);
+            });
+
+            return _context6.abrupt('return', group);
+
+          case 6:
+          case 'end':
+            return _context6.stop();
+        }
+      }
+    }, _callee6, _this);
+  }));
+
+  return function getGroupTaskList() {
+    return _ref6.apply(this, arguments);
   };
 }();

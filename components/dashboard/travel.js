@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Row, Col } from 'antd';
-import { setVehicle, getVehicleList, getMyVehicle } from '../apis';
+import { getVehicleList, getMyVehicle } from '../apis';
 import classNames from 'classnames';
 
 export default class extends PureComponent {

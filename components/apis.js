@@ -155,3 +155,34 @@ export const getMyVehicle = async () => {
     };
   });
 }
+
+// task list
+export const getTaskList = () => {
+  const query = new AV.Query('Task');
+
+  return query.find().then(results => {
+    let data = [];
+
+    results.map(r => {
+      data.push(LeanCloudResParser(r));
+    });
+
+    return data;
+  }, function (error) {
+  });
+}
+
+export const getGroupTaskList = async () => {
+  const list = await getTaskList();
+  let group = {};
+
+  list.map(item => {
+    if (!group[item.group]) {
+      group[item.group] = [];
+    }
+
+    group[item.group].push(item);
+  });
+
+  return group;
+}
