@@ -92,40 +92,46 @@ export default class extends PureComponent {
 
   renderTask() {
     const { groupTasks } = this.state;
-    const keys = Object.keys(groupTasks);
+    const keys = Object.keys(groupTasks) || [];
     let groupArray = [];
 
-    keys.map(key => {
-      groupArray.push({
-        key: key,
-        list: groupTasks[key]
+    if (keys.length) {
+      keys.map(key => {
+        groupArray.push({
+          key: key,
+          list: groupTasks[key]
+        });
       });
-    });
+    }
 
     return (
-      <List
-        header={<div>任务中心</div>}
-        footer={<div>选择你需要确认的任务，并点击“完成”</div>}
-        bordered
-        dataSource={groupArray}
-        renderItem={item => (
-          <List.Item>
-            <div style={{
-              display: 'block'
-            }}>
-              <h1>{item.key}</h1><br/>
+      <div>
+      { groupArray.length ? (
+        <List
+          header={<div>任务中心</div>}
+          footer={<div>选择你需要确认的任务，并点击“完成”</div>}
+          bordered
+          dataSource={groupArray}
+          renderItem={item => (
+            <List.Item>
+              <div style={{
+                display: 'block'
+              }}>
+                <h1>{item.key}</h1><br/>
 
-              <Select defaultValue="请选择" style={{ width: 240 }} onChange={this.claimTask}>
-                { item.list.map(task => (
-                  <Option value={task.id} key={`select-${task.id}`}>{ task.name }（{ task.physical ? `体力值 +${task.physical} ` : null}
-                  { task.wisdom ? `精神值 +${task.wisdom} ` : null}
-                  { task.mileage ? `里程 +${task.mileage}` : null}）</Option>
-                ))}
-              </Select>
-            </div>
-          </List.Item>
-        )}
-      />
+                <Select defaultValue="请选择" style={{ width: 240 }} onChange={this.claimTask}>
+                  { item && item.list && item.list.map(task => (
+                    <Option value={task.id} key={`select-${task.id}`}>{ task.name }（{ task.physical ? `体力值 +${task.physical} ` : null}
+                    { task.wisdom ? `精神值 +${task.wisdom} ` : null}
+                    { task.mileage ? `里程 +${task.mileage}` : null}）</Option>
+                  ))}
+                </Select>
+              </div>
+            </List.Item>
+          )}
+        />
+      ) : null }
+      </div>
     );
   }
 

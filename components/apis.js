@@ -43,15 +43,17 @@ export const getRecords = async () => {
   let list = [];
 
   return query.find().then(results => {
-    results.map(r => {
-      list.push(Object.assign(LeanCloudResParser(r.attributes.task), {
-        createdAt: r.createdAt
-      }));
-    });
+    if (results && results.length) {
+      results.map(r => {
+        list.push(Object.assign(LeanCloudResParser(r.attributes.task), {
+          createdAt: r.createdAt
+        }));
+      });
+    }
     
     return list;
-  }, function (error) {
-    return [];
+  }).catch((error) => {
+    assert.isNotOk(error,'Promise error');
   });
 }
 
@@ -64,15 +66,17 @@ export const getScore =  async () => {
     mileage: 0
   };
 
-  records.map(r => {
-    const { physical, wisdom, mileage } = r;
-
-    score = {
-      physical: score.physical + physical,
-      wisdom: score.wisdom + wisdom,
-      mileage: score.mileage + mileage,
-    }
-  });
+  if (records && records.length) {
+    records.map(r => {
+      const { physical, wisdom, mileage } = r;
+  
+      score = {
+        physical: score.physical + physical,
+        wisdom: score.wisdom + wisdom,
+        mileage: score.mileage + mileage,
+      }
+    });
+  }
 
   return score;
 }
@@ -221,8 +225,8 @@ export const getDestinationList = () => {
     }
 
     return data;
-  }, error => {
-    console.error(error);
+  }).catch((error) => {
+    assert.isNotOk(error,'Promise error');
   });
 }
 
@@ -245,7 +249,7 @@ export const getMyDestination = async () => {
     }
 
     return {};
-  }, error => {
-    console.error(error);
+  }).catch((error) => {
+    assert.isNotOk(error,'Promise error');
   });
 }
