@@ -52,6 +52,10 @@ var _dashboard2 = _interopRequireDefault(_dashboard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _jsxFileName = '/Users/wyy/Documents/code/bae-super-journey/next-src/pages/user.js?entry';
+// import AV from 'leancloud-storage';
+
+
 var _class = function (_React$Component) {
   (0, _inherits3.default)(_class, _React$Component);
 
@@ -101,13 +105,43 @@ var _class = function (_React$Component) {
     value: function render() {
       var username = this.state.username;
 
-      return _react2.default.createElement(_layout2.default, null, _react2.default.createElement(_reactHelmet.Helmet, null, _react2.default.createElement('title', null, 'User - \u8D85\u51E1\u4E4B\u65C5')), _react2.default.createElement('h1', null, '\u8D85\u51E1\u4E4B\u65C5', _react2.default.createElement('p', { onClick: this.logOut, className: 'text-right', style: {
+      return _react2.default.createElement(_layout2.default, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 50
+        }
+      }, _react2.default.createElement(_reactHelmet.Helmet, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 51
+        }
+      }, _react2.default.createElement('title', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 52
+        }
+      }, 'User - \u8D85\u51E1\u4E4B\u65C5')), _react2.default.createElement('h1', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55
+        }
+      }, '\u8D85\u51E1\u4E4B\u65C5', _react2.default.createElement('p', { onClick: this.logOut, className: 'text-right', style: {
           fontSize: 12
-        } }, '\u9000\u51FA')), _react2.default.createElement(_dashboard2.default, null));
+        }, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55
+        }
+      }, '\u9000\u51FA')), _react2.default.createElement(_dashboard2.default, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 59
+        }
+      }));
     }
   }]);
 
   return _class;
 }(_react2.default.Component);
-// import AV from 'leancloud-storage';
+
 exports.default = _class;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL3VzZXIuanMiXSwibmFtZXMiOlsiUmVhY3QiLCJMaW5rIiwiSGVsbWV0IiwiUm91dGVyIiwiTGF5b3V0IiwiTGVhbkNsb3VkUmVzUGFyc2VyIiwiQVYiLCJEYXNoYm9hcmQiLCJwcm9wcyIsInN0YXRlIiwidXNlcm5hbWUiLCJ1aWQiLCJsb2dPdXQiLCJiaW5kIiwiY3VycmVudFVzZXIiLCJVc2VyIiwiY3VycmVudCIsImlkIiwic2V0U3RhdGUiLCJwdXNoIiwic2V0VGltZW91dCIsImZvbnRTaXplIiwiQ29tcG9uZW50Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLEFBQU87Ozs7QUFFUCxBQUFPOzs7O0FBQ1AsQUFBUzs7QUFDVCxBQUFTLEFBQWM7O0FBQ3ZCLEFBQU8sQUFBWTs7OztBQUNuQixBQUFTLEFBQTBCOztBQUNuQyxBQUFPLEFBQVE7Ozs7QUFDZixBQUFPLEFBQWU7Ozs7Ozs7QUFQdEI7Ozs7a0NBVUU7O2tCQUFBLEFBQVksT0FBTzt3Q0FBQTs7c0lBQUEsQUFDWCxBQUVOOztVQUFBLEFBQUs7Z0JBQVEsQUFDRCxBQUNWO1dBRkYsQUFBYSxBQUVOLEFBR1A7QUFMYSxBQUNYOztVQUlGLEFBQUssU0FBUyxNQUFBLEFBQUssT0FBTCxBQUFZLEtBUlQsQUFRakI7V0FDRDs7Ozs7d0NBRW1CLEFBQ2xCO1VBQUksY0FBYyxvQkFBQSxBQUFHLEtBQXJCLEFBQWtCLEFBQVEsQUFFMUI7O1VBQUEsQUFBSSxhQUFhO2tDQUNVLCtCQURWLEFBQ1UsQUFBbUI7WUFEN0IsQUFDUCx5QkFETyxBQUNQO1lBRE8sQUFDSCwrQkFERyxBQUNILEFBQ1o7O2FBQUEsQUFBSztvQkFBUyxBQUVaO2VBRkYsQUFBYyxBQUVQLEFBRVI7QUFKZSxBQUNaO0FBSEosYUFPSyxBQUNIO3VCQUFBLEFBQU8sS0FBUCxBQUFZLEFBQ2I7QUFDRjs7Ozs2QkFFUSxBQUNQOzBCQUFBLEFBQUcsS0FBSCxBQUFRLEFBRVI7O2lCQUFXLFlBQVUsQUFDbkI7dUJBQUEsQUFBTyxLQUFQLEFBQVksQUFDYjtBQUZELFNBQUEsQUFFRyxBQUNKOzs7OzZCQUVTO1VBQUEsQUFDQSxXQUFhLEtBRGIsQUFDa0IsTUFEbEIsQUFDQSxBQUVSOzs2QkFDRSxBQUFDOztvQkFBRDtzQkFBQSxBQUNFO0FBREY7QUFBQSxPQUFBLGtCQUNFLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQUZKLEFBQ0UsQUFDRSxBQUdGLHFEQUFBLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQUFRLDRDQUFBLGNBQUEsT0FBRyxTQUFTLEtBQVosQUFBaUIsUUFBUSxXQUF6QixBQUFtQyxjQUFhO29CQUFoRCxBQUF1RCxBQUNuRDtBQURtRCxBQUM3RDtvQkFETTtzQkFBQTtBQUFBO1NBTFYsQUFLRSxBQUFRLEFBSVIsa0NBQUEsQUFBQzs7b0JBQUQ7c0JBVkosQUFDRSxBQVNFLEFBR0w7QUFISztBQUFBOzs7OztFQWhEcUIsZ0JBQU0sQSIsImZpbGUiOiJ1c2VyLmpzP2VudHJ5Iiwic291cmNlUm9vdCI6Ii9Vc2Vycy93eXkvRG9jdW1lbnRzL2NvZGUvYmFlLXN1cGVyLWpvdXJuZXkvbmV4dC1zcmMifQ==

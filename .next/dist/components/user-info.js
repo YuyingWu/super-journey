@@ -42,6 +42,9 @@ var _apis = require('./apis');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _jsxFileName = '/Users/wyy/Documents/code/bae-super-journey/next-src/components/user-info.js';
+
+
 var _class = function (_PureComponent) {
   (0, _inherits3.default)(_class, _PureComponent);
 
@@ -193,7 +196,38 @@ var _class = function (_PureComponent) {
           levelPhysical = _state.levelPhysical,
           levelWisdom = _state.levelWisdom;
 
-      return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, username), _react2.default.createElement('p', null, '\u7B49\u7EA7\uFF1ALv.', level), _react2.default.createElement('div', { style: { width: 170 } }, '\u4F53\u529B\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: physical / levelPhysical * 100 }), '\u7CBE\u795E\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: wisdom / levelWisdom * 100 }), '\u91CC\u7A0B\u6570\uFF1A', _react2.default.createElement(_antd.Progress, { percent: mileage / 50 * 100 })));
+      return _react2.default.createElement('div', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 63
+        }
+      }, _react2.default.createElement('h1', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 64
+        }
+      }, username), _react2.default.createElement('p', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        }
+      }, '\u7B49\u7EA7\uFF1ALv.', level), _react2.default.createElement('div', { style: { width: 170 }, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 67
+        }
+      }, '\u4F53\u529B\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: physical / levelPhysical * 100, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 68
+        }
+      }), '\u7CBE\u795E\u503C\uFF1A', _react2.default.createElement(_antd.Progress, { percent: wisdom / levelWisdom * 100, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 69
+        }
+      }), '\u91CC\u7A0B\u6570\uFF1A', _react2.default.createElement(_antd.Progress, { percent: mileage / 50 * 100, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 70
+        }
+      })));
     }
   }]);
 
@@ -201,3 +235,4 @@ var _class = function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.default = _class;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvdXNlci1pbmZvLmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiUHVyZUNvbXBvbmVudCIsIlByb2dyZXNzIiwiZ2V0VXNlciIsImdldFNjb3JlIiwiZ2V0VXNlckxldmVsIiwicHJvcHMiLCJzdGF0ZSIsInVzZXJuYW1lIiwicGh5c2ljYWwiLCJ3aXNkb20iLCJtaWxlYWdlIiwibGV2ZWwiLCJsZXZlbFBoeXNpY2FsIiwibGV2ZWxXaXNkb20iLCJmZXRjaFVzZXJEYXRhIiwiZmV0Y2hVc2VyU2NvcmUiLCJmZXRjaFVzZXJMZXZlbCIsInVzZXIiLCJzZXRTdGF0ZSIsIndpZHRoIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFTOzs7O0FBQ2hCLEFBQVM7O0FBQ1QsQUFBUyxBQUFTLEFBQVUsQUFBb0I7Ozs7Ozs7O2tDQUc5Qzs7a0JBQUEsQUFBWSxPQUFPO3dDQUFBOztzSUFBQSxBQUNYLEFBRU47O1VBQUEsQUFBSztnQkFBUSxBQUNELEFBQ1Y7Z0JBRlcsQUFFRCxBQUNWO2NBSFcsQUFHSCxBQUNSO2VBSlcsQUFJRixBQUNUO2FBTFcsQUFLSixBQUNQO3FCQU5XLEFBTUksQUFDZjttQkFWZSxBQUdqQixBQUFhLEFBT0U7QUFQRixBQUNYO1dBUUg7Ozs7O3lDQUVvQixBQUNuQjtXQUFBLEFBQUssQUFDTDtXQUFBLEFBQUssQUFDTDtXQUFBLEFBQUssQUFDTjs7Ozs7Ozs7Ozs7O3VCQUdvQixBOzttQkFBYjtBLGdDQUNFO0EsMkIsQUFBYSxLLEFBQWIsQUFFUjs7cUJBQUEsQUFBSzs0QkFBTCxBQUFjO0FBQUEsQUFDWjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O3VCLEFBSzBDOzs7a0NBQXBDO0EsaUNBQUEsQUFBVSxBO0EsK0IsQUFBQSxBQUFRO0EsZ0NBQUEsQSxBQUUxQjs7cUJBQUEsQUFBSzs0QkFBUyxBQUVaOzBCQUZZLEFBR1o7MkJBSEYsQUFBYztBQUFBLEFBQ1o7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt1QixBQVdROzs7a0NBSFI7QSw4QixBQUFBLEFBQ1U7QSxzQ0FBVixBLEFBQ1E7QSxvQyxBQUFSLEFBR0Y7O3FCQUFBLEFBQUs7eUJBQVMsQUFFWjtpQ0FGWSxBQUdaOytCQUhGLEFBQWM7QUFBQSxBQUNaOzs7Ozs7Ozs7Ozs7Ozs7Ozs7NkJBTUs7bUJBQzRFLEtBRDVFLEFBQ2lGO1VBRGpGLEFBQ0Msa0JBREQsQUFDQztVQURELEFBQ1csa0JBRFgsQUFDVztVQURYLEFBQ3FCLGdCQURyQixBQUNxQjtVQURyQixBQUM2QixpQkFEN0IsQUFDNkI7VUFEN0IsQUFDc0MsZUFEdEMsQUFDc0M7VUFEdEMsQUFDNkMsdUJBRDdDLEFBQzZDO1VBRDdDLEFBQzRELHFCQUQ1RCxBQUM0RCxBQUVuRTs7NkJBQ0UsY0FBQTs7b0JBQUE7c0JBQUEsQUFDRTtBQURGO0FBQUEsT0FBQSxrQkFDRSxjQUFBOztvQkFBQTtzQkFBQSxBQUFNO0FBQU47QUFBQSxTQURGLEFBQ0UsQUFDQSwyQkFBQSxjQUFBOztvQkFBQTtzQkFBQTtBQUFBO0FBQUEsU0FBVyx5QkFGYixBQUVFLEFBRUEsd0JBQUEsY0FBQSxTQUFLLE9BQU8sRUFBRSxPQUFkLEFBQVksQUFBUztvQkFBckI7c0JBQUE7QUFBQTtTQUNNLDRDQUFBLEFBQUMsZ0NBQVMsU0FBVSxXQUFBLEFBQVcsZ0JBQS9CLEFBQStDO29CQUEvQztzQkFETixBQUNNO0FBQUE7VUFDQSw0Q0FBQSxBQUFDLGdDQUFTLFNBQVUsU0FBQSxBQUFTLGNBQTdCLEFBQTJDO29CQUEzQztzQkFGTixBQUVNO0FBQUE7VUFDQSw0Q0FBQSxBQUFDLGdDQUFTLFNBQVUsVUFBQSxBQUFVLEtBQTlCLEFBQW1DO29CQUFuQztzQkFSVixBQUNFLEFBSUUsQUFHTSxBQUlYO0FBSlc7Ozs7OztBQWpFZSxBIiwiZmlsZSI6InVzZXItaW5mby5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvd3l5L0RvY3VtZW50cy9jb2RlL2JhZS1zdXBlci1qb3VybmV5L25leHQtc3JjIn0=

@@ -28,6 +28,11 @@ export const getUid = () => {
 // 获取打卡记录
 export const getRecords = async () => {
   const uid = await getUid();
+
+  if (uid === -1){
+    return;
+  }
+
   const query = new AV.Query('Game');
   const User = AV.Object.createWithoutData('_User', uid);
 
@@ -86,25 +91,27 @@ export const getUserLevel = async () => {
   const query = new AV.Query('Level');
 
   return query.find().then(res => {
-    res.map(r => {
-      levelList.push(LeanCloudResParser(r));
-    });
-
-    levelList.map(item => {
-      const { level, physical: levelPhysical, wisdom: levelWisdom } = item;
-
-      switch(level) {
-        case 2:
-          if (physical > levelPhysical && wisdom > levelWisdom) {
-            userLevel = {
-              level,
-              physical: levelPhysical,
-              wisdom: levelWisdom
-            };
-          }
-          break;
-      }
-    });
+    if (res && res.length) {
+      res.map(r => {
+        levelList.push(LeanCloudResParser(r));
+      });
+  
+      levelList.map(item => {
+        const { level, physical: levelPhysical, wisdom: levelWisdom } = item;
+  
+        switch(level) {
+          case 2:
+            if (physical > levelPhysical && wisdom > levelWisdom) {
+              userLevel = {
+                level,
+                physical: levelPhysical,
+                wisdom: levelWisdom
+              };
+            }
+            break;
+        }
+      });
+    }
 
     return userLevel;
   });
@@ -113,6 +120,11 @@ export const getUserLevel = async () => {
 // 设置当前交通工具
 export const setVehicle = async (vehicle) => {
   const uid = await getUid();
+
+  if (uid === -1){
+    return;
+  }
+
   const User = AV.Object.createWithoutData('_User', uid);
   // const VehicleList = await getVehicleList(vehicle);
   // const v = AV.Object.createWithoutData('Vehicle', VehicleList[0].id);
@@ -135,9 +147,11 @@ export const getVehicleList = (type) => {
   return query.find().then(results => {
     let list = [];
 
-    results.map(r => {
-      list.push(LeanCloudResParser(r));
-    });
+    if (results && results.length) {
+      results.map(r => {
+        list.push(LeanCloudResParser(r));
+      });
+    }
 
     return list;
   });
@@ -146,6 +160,11 @@ export const getVehicleList = (type) => {
 // 获取我的交通工具
 export const getMyVehicle = async () => {
   const uid = await getUid();
+
+  if (uid === -1){
+    return;
+  }
+
   const query = new AV.Query('_User');
 
   return query.get(uid).then(user => {
@@ -163,9 +182,11 @@ export const getTaskList = () => {
   return query.find().then(results => {
     let data = [];
 
-    results.map(r => {
-      data.push(LeanCloudResParser(r));
-    });
+    if (results && results.length) {
+      results.map(r => {
+        data.push(LeanCloudResParser(r));
+      });
+    }
 
     return data;
   }, function (error) {
@@ -185,4 +206,46 @@ export const getGroupTaskList = async () => {
   });
 
   return group;
+}
+
+export const getDestinationList = () => {
+  const query = new AV.Query('Destination');
+
+  return query.find().then(results => {
+    let data = [];
+
+    if (results && results.length) {
+      results.map(r => {
+        data.push(LeanCloudResParser(r));
+      });
+    }
+
+    return data;
+  }, error => {
+    console.error(error);
+  });
+}
+
+export const getMyDestination = async () => {
+  const uid = await getUid();
+
+  if (uid === -1){
+    return;
+  }
+
+  const query = new AV.Query('_User');
+
+  query.include(['travel']);
+
+  return query.get(uid).then(user => {
+    if (user.get('travel')) {
+      return {
+        travel: LeanCloudResParser(user.get('travel'))
+      };
+    }
+
+    return {};
+  }, error => {
+    console.error(error);
+  });
 }

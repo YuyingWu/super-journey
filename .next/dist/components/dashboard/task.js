@@ -60,6 +60,8 @@ var _apis = require('../apis');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _jsxFileName = '/Users/wyy/Documents/code/bae-super-journey/next-src/components/dashboard/task.js';
+
 var moment = require('moment');
 var Option = _antd.Select.Option;
 
@@ -91,8 +93,6 @@ var _class = function (_PureComponent) {
       this.init();
 
       this.groupTask();
-
-      (0, _apis.setVehicle)('foot');
     }
   }, {
     key: 'init',
@@ -282,16 +282,57 @@ var _class = function (_PureComponent) {
       });
 
       return _react2.default.createElement(_antd.List, {
-        header: _react2.default.createElement('div', null, '\u4EFB\u52A1\u4E2D\u5FC3'),
-        footer: _react2.default.createElement('div', null, '\u9009\u62E9\u4F60\u9700\u8981\u786E\u8BA4\u7684\u4EFB\u52A1\uFF0C\u5E76\u70B9\u51FB\u201C\u5B8C\u6210\u201D'),
+        header: _react2.default.createElement('div', {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 107
+          }
+        }, '\u4EFB\u52A1\u4E2D\u5FC3'),
+        footer: _react2.default.createElement('div', {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 108
+          }
+        }, '\u9009\u62E9\u4F60\u9700\u8981\u786E\u8BA4\u7684\u4EFB\u52A1\uFF0C\u5E76\u70B9\u51FB\u201C\u5B8C\u6210\u201D'),
         bordered: true,
         dataSource: groupArray,
         renderItem: function renderItem(item) {
-          return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('div', { style: {
+          return _react2.default.createElement(_antd.List.Item, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 112
+            }
+          }, _react2.default.createElement('div', { style: {
               display: 'block'
-            } }, _react2.default.createElement('h1', null, item.key), _react2.default.createElement('br', null), _react2.default.createElement(_antd.Select, { defaultValue: '\u8BF7\u9009\u62E9', style: { width: 240 }, onChange: _this4.claimTask }, item.list.map(function (task) {
-            return _react2.default.createElement(Option, { value: task.id, key: 'select-' + task.id }, task.name, '\uFF08', task.physical ? '\u4F53\u529B\u503C' + task.physical + ' ' : null, task.wisdom ? '\u7CBE\u795E\u503C' + task.wisdom + ' ' : null, task.mileage ? '\u91CC\u7A0B' + task.mileage : null, '\uFF09');
+            }, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 113
+            }
+          }, _react2.default.createElement('h1', {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 116
+            }
+          }, item.key), _react2.default.createElement('br', {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 116
+            }
+          }), _react2.default.createElement(_antd.Select, { defaultValue: '\u8BF7\u9009\u62E9', style: { width: 240 }, onChange: _this4.claimTask, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 118
+            }
+          }, item.list.map(function (task) {
+            return _react2.default.createElement(Option, { value: task.id, key: 'select-' + task.id, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 120
+              }
+            }, task.name, '\uFF08', task.physical ? '\u4F53\u529B\u503C +' + task.physical + ' ' : null, task.wisdom ? '\u7CBE\u795E\u503C +' + task.wisdom + ' ' : null, task.mileage ? '\u91CC\u7A0B +' + task.mileage : null, '\uFF09');
           }))));
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 106
         }
       });
     }
@@ -301,12 +342,50 @@ var _class = function (_PureComponent) {
       var records = this.state.records;
 
       return _react2.default.createElement(_antd.List, {
-        header: _react2.default.createElement('div', null, '\u4EFB\u52A1\u6253\u5361'),
-        footer: _react2.default.createElement('div', null, '\u6253\u5361\u7684\u8BB0\u5F55'),
+        header: _react2.default.createElement('div', {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 137
+          }
+        }, '\u4EFB\u52A1\u6253\u5361'),
+        footer: _react2.default.createElement('div', {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 138
+          }
+        }, '\u6253\u5361\u7684\u8BB0\u5F55'),
         bordered: true,
         dataSource: records,
         renderItem: function renderItem(item) {
-          return _react2.default.createElement(_antd.List.Item, null, _react2.default.createElement('div', null, _react2.default.createElement('p', null, moment(item.createdAt).format('HH:mm MMM Do YYYY')), _react2.default.createElement('p', null, _react2.default.createElement('span', { className: 'text-primary' }, item.name), '\uFF1A', item.physical ? '\u4F53\u529B' + item.physical : null, item.wisdom ? '\u7CBE\u795E' + item.wisdom : null, item.mileage ? '\u91CC\u7A0B' + item.mileage : null)));
+          return _react2.default.createElement(_antd.List.Item, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 142
+            }
+          }, _react2.default.createElement('div', {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 143
+            }
+          }, _react2.default.createElement('p', {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 144
+            }
+          }, moment(item.createdAt).format('HH:mm MMM Do YYYY')), _react2.default.createElement('p', {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 145
+            }
+          }, _react2.default.createElement('span', { className: 'text-primary', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 146
+            }
+          }, item.name), '\uFF1A', item.physical ? '\u4F53\u529B +' + item.physical : null, item.wisdom ? '\u7CBE\u795E +' + item.wisdom : null, item.mileage ? '\u91CC\u7A0B +' + item.mileage : null)));
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 136
         }
       });
     }
@@ -317,7 +396,30 @@ var _class = function (_PureComponent) {
           tasks = _state.tasks,
           records = _state.records;
 
-      return _react2.default.createElement('div', null, _react2.default.createElement(_antd.Row, null, _react2.default.createElement(_antd.Col, { lg: 12, md: 12, xs: 24 }, records.length ? this.renderRecords() : null), _react2.default.createElement(_antd.Col, { lg: 12, md: 12, xs: 24 }, _react2.default.createElement('div', null, tasks.length ? this.renderTask() : null))));
+      return _react2.default.createElement('div', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 162
+        }
+      }, _react2.default.createElement(_antd.Row, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 163
+        }
+      }, _react2.default.createElement(_antd.Col, { lg: 12, md: 12, xs: 24, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 164
+        }
+      }, records.length ? this.renderRecords() : null), _react2.default.createElement(_antd.Col, { lg: 12, md: 12, xs: 24, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 167
+        }
+      }, _react2.default.createElement('div', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 168
+        }
+      }, tasks.length ? this.renderTask() : null))));
     }
   }]);
 
@@ -325,3 +427,4 @@ var _class = function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.default = _class;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvZGFzaGJvYXJkL3Rhc2suanMiXSwibmFtZXMiOlsiUmVhY3QiLCJQdXJlQ29tcG9uZW50IiwiQnV0dG9uIiwiTGlzdCIsIm1lc3NhZ2UiLCJSb3ciLCJDb2wiLCJTZWxlY3QiLCJBViIsIkxlYW5DbG91ZFJlc1BhcnNlciIsImdldFVpZCIsImdldFJlY29yZHMiLCJnZXRUYXNrTGlzdCIsImdldEdyb3VwVGFza0xpc3QiLCJzZXRWZWhpY2xlIiwibW9tZW50IiwicmVxdWlyZSIsIk9wdGlvbiIsInByb3BzIiwic3RhdGUiLCJ0YXNrcyIsInVpZCIsInJlY29yZHMiLCJncm91cFRhc2tzIiwicmVuZGVyVGFzayIsImJpbmQiLCJjbGFpbVRhc2siLCJmZXRjaEdhbWVMb2ciLCJmZXRjaFRhc2tMaXN0IiwiaW5pdCIsImdyb3VwVGFzayIsInNldFN0YXRlIiwiZGF0YSIsImdyb3VwIiwibGlzdCIsImxlbmd0aCIsImlkIiwidGFzayIsImZpbmQiLCJ0IiwiVXNlciIsIk9iamVjdCIsImNyZWF0ZVdpdGhvdXREYXRhIiwiVGFzayIsIkdhbWUiLCJzZXQiLCJzYXZlIiwidGhlbiIsInJlc3VsdHMiLCJpbmZvIiwiY3JlYXRlZEF0Iiwia2V5cyIsImdyb3VwQXJyYXkiLCJtYXAiLCJwdXNoIiwia2V5IiwiZGlzcGxheSIsIml0ZW0iLCJ3aWR0aCIsIm5hbWUiLCJwaHlzaWNhbCIsIndpc2RvbSIsIm1pbGVhZ2UiLCJmb3JtYXQiLCJyZW5kZXJSZWNvcmRzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFTOzs7O0FBQ2hCLEFBQVMsQUFBUSxBQUFNLEFBQVMsQUFBSyxBQUFLOztBQUMxQyxBQUFPLEFBQVE7Ozs7QUFDZixBQUFTLEFBQTBCOztBQUNuQyxBQUFTLEFBQVEsQUFBWSxBQUFhLEFBQWtCLEFBQWtCOzs7Ozs7QUFDOUUsSUFBTSxTQUFOLEFBQU0sQUFB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O3dCQUFBO0FBQUE7QUFBQSxTQUFBLEVBRlYsQUFFVSxBQUNSO2tCQUhGLEFBSUU7b0JBSkYsQUFJYyxBQUNaO29CQUFZLDBCQUFBO2lDQUNULGNBQUQsV0FBQSxBQUFNOzt3QkFBTjswQkFBQSxBQUNFO0FBREY7QUFBQSxXQUFBLGtCQUNFLGNBQUE7O3dCQUFBOzBCQUFBLEFBQ0U7QUFERjtBQUFBLDZCQUNFLGNBQUE7O3dCQUFBOzBCQUFBLEFBQUs7QUFBTDtBQUFBLG9CQUFZLEtBQVAsQUFBWSxXQUFaLEFBQXVCLE9BRDlCLEFBQ0UsQUFBSyxBQUE4QixBQUNuQyx1Q0FBQSxjQUFBOzt3QkFBQTswQkFBQSxBQUNFO0FBREY7QUFBQSw2QkFDRSxjQUFBLFVBQU0sV0FBTixBQUFnQjt3QkFBaEI7MEJBQUEsQUFBZ0M7QUFBaEM7a0JBREYsQUFDRSxBQUFxQyxPQUNwQyxlQUFBLEFBQUssOEJBQWtCLEtBQXZCLEFBQTRCLFdBRi9CLEFBRTRDLEFBQ3pDLFdBQUEsQUFBSyw0QkFBZ0IsS0FBckIsQUFBMEIsU0FIN0IsQUFHd0MsQUFDckMsV0FBQSxBQUFLLDZCQUFpQixLQUF0QixBQUEyQixVQVJ4QixBQUNWLEFBQ0UsQUFFRSxBQUkwQztBQWJsRDs7b0JBQUE7c0JBREYsQUFDRSxBQW9CSDtBQXBCRztBQUNFLE9BREY7Ozs7NkJBc0JLO21CQUNvQixLQURwQixBQUN5QjtVQUR6QixBQUNDLGVBREQsQUFDQztVQURELEFBQ1EsaUJBRFIsQUFDUSxBQUVmOzs2QkFDRSxjQUFBOztvQkFBQTtzQkFBQSxBQUNFO0FBREY7QUFBQSxPQUFBLGtCQUNFLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLEFBQUMsMkJBQUksSUFBTCxBQUFTLElBQUksSUFBYixBQUFpQixJQUFJLElBQXJCLEFBQXlCO29CQUF6QjtzQkFBQSxBQUNJO0FBREo7aUJBQ0ksQUFBUSxTQUFTLEtBQWpCLEFBQWlCLEFBQUssa0JBRjVCLEFBQ0UsQUFDNEMsQUFFNUMsdUJBQUEsQUFBQywyQkFBSSxJQUFMLEFBQVMsSUFBSSxJQUFiLEFBQWlCLElBQUksSUFBckIsQUFBeUI7b0JBQXpCO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxjQUFBOztvQkFBQTtzQkFBQSxBQUNJO0FBREo7QUFBQSxlQUNJLEFBQU0sU0FBUyxLQUFmLEFBQWUsQUFBSyxlQVJoQyxBQUNFLEFBQ0UsQUFJRSxBQUNFLEFBQ3VDLEFBTWhEOzs7OztBQXRLMEIsQSIsImZpbGUiOiJ0YXNrLmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy93eXkvRG9jdW1lbnRzL2NvZGUvYmFlLXN1cGVyLWpvdXJuZXkvbmV4dC1zcmMifQ==

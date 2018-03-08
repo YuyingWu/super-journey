@@ -27,8 +27,6 @@ export default class extends PureComponent {
     this.init();
 
     this.groupTask();
-
-    setVehicle('foot');
   }
 
   async init() {
@@ -119,9 +117,9 @@ export default class extends PureComponent {
 
               <Select defaultValue="请选择" style={{ width: 240 }} onChange={this.claimTask}>
                 { item.list.map(task => (
-                  <Option value={task.id} key={`select-${task.id}`}>{ task.name }（{ task.physical ? `体力值${task.physical} ` : null}
-                  { task.wisdom ? `精神值${task.wisdom} ` : null}
-                  { task.mileage ? `里程${task.mileage}` : null}）</Option>
+                  <Option value={task.id} key={`select-${task.id}`}>{ task.name }（{ task.physical ? `体力值 +${task.physical} ` : null}
+                  { task.wisdom ? `精神值 +${task.wisdom} ` : null}
+                  { task.mileage ? `里程 +${task.mileage}` : null}）</Option>
                 ))}
               </Select>
             </div>
@@ -146,9 +144,9 @@ export default class extends PureComponent {
               <p>{ moment(item.createdAt).format('HH:mm MMM Do YYYY') }</p>
               <p>
                 <span className="text-primary">{item.name}</span>：
-                {item.physical ? `体力${item.physical}` : null}
-                {item.wisdom ? `精神${item.wisdom}` : null}
-                {item.mileage ? `里程${item.mileage}` : null}
+                {item.physical ? `体力 +${item.physical}` : null}
+                {item.wisdom ? `精神 +${item.wisdom}` : null}
+                {item.mileage ? `里程 +${item.mileage}` : null}
               </p>
             </div>
           </List.Item>
