@@ -1,20 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import Footer from './footer';
-// import AV from 'leancloud-storage';
-// import { Helmet } from "react-helmet";
+import { TestStore } from '../stores/test';
 
-export default class extends PureComponent {
-  // componentDidMount() {
-  //   console.log(AV._installationId);
-  //   if(!AV._installationId){
-  //     const appId = 'Do5NpSTuP2APFE9wQAvDxmxM-gzGzoHsz';
-  //     const appKey = 'TL0dh8sMu3m6MMaEukSxPfon';
-  //     AV.init({ appId, appKey });
-  //   }
-  // }
+export default class extends Component {
   render() {
     const { children } = this.props;
+    const childrenWithProps = React.Children.map(children, child =>
+      React.cloneElement(child, { store: TestStore }));
 
     return (
       <div>
@@ -46,7 +39,7 @@ export default class extends PureComponent {
         </nav>
 
         <main className="container">
-          {children}
+          {childrenWithProps}
         </main>
       </div>
     );
