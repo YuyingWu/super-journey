@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Button, message } from 'antd';
+import { Row, Col, Button, message, List, Modal } from 'antd';
 import classNames from 'classnames';
 import AV from '../leancloud';
-import { getVehicleList, getMyVehicle, getUid, getDestinationList, getMyDestination } from '../apis';
+import { getVehicleList, getMyVehicle, getUid, getDestinationList, getMyDestination, getTravelList } from '../apis';
+import TravelHistory from '../travel/history';
 const moment = require('moment');
 
 export default class extends PureComponent {
@@ -13,10 +14,21 @@ export default class extends PureComponent {
       vehicles: [],
       myVehicle: 'foot',
       enableTravel: false,
+      travelHistory: [],
+      unreadTravelVisible: false,
+      destination: {
+        name: ''
+      },
+      lastTravelId: '',
+      historyModalVisible: false,
     }
 
     this.createTravel = this.createTravel.bind(this);
     this.updateTravelStatus = this.updateTravelStatus.bind(this);
+    // this.renderModal = this.renderModal.bind(this);
+    this.handleOk = this.handleOk.bind(this);
+    this.historyClose = this.historyClose.bind(this);
+    this.checkMyTravel = this.checkMyTravel.bind(this);
   }
 
   componentWillMount() {
@@ -24,6 +36,7 @@ export default class extends PureComponent {
     this.fetchVehicles();
     this.fetchMyVehicle();
     this.fetchMyDestination();
+    this.fetchTravelHistory();
   }
 
   async init() {
@@ -68,6 +81,16 @@ export default class extends PureComponent {
     });
   }
 
+  async fetchTravelHistory() {
+    const list = await getTravelList();
+
+    this.setState({
+      travelHistory: [ ...list ]
+    }, () => {
+      this.renderLastTravel();
+    });
+  }
+
   getGarage(data) {
     if (!data) {
       return;
@@ -107,7 +130,7 @@ export default class extends PureComponent {
     Travel.set('user', User);
     Travel.set('destination', Destination);
     Travel.set('startTime', moment().toDate());
-    Travel.set('endTime', moment().hour(24).toDate());
+    Travel.set('endTime', moment().add(1, 'day').toDate());
 
     Travel.save().then(results => {
       if (results) {
@@ -137,8 +160,43 @@ export default class extends PureComponent {
     });
   }
 
+  renderLastTravel() {
+    const { travelHistory } = this.state;
+
+    if (travelHistory && travelHistory.length) {
+      const lastTravel = travelHistory[0];
+
+      if (lastTravel.status === 'timesup') {
+        this.setState({
+          unreadTravelVisible: true,
+          destination: lastTravel.destination,
+          lastTravelId: lastTravel.travelId,
+        });
+      }
+    }
+  }
+
+  handleOk() {
+    this.setState({
+      unreadTravelVisible: false
+    });
+  }
+
+  historyClose() {
+    this.setState({
+      historyModalVisible: false
+    });
+  }
+
+  checkMyTravel() {
+    this.setState({
+      historyModalVisible: true,
+      unreadTravelVisible: false
+    })
+  }
+
   render() {
-    const { vehicles, myVehicle, garage, enableTravel } = this.state;
+    const { vehicles, myVehicle, garage, enableTravel, travelHistory, unreadTravelVisible, destination, historyModalVisible, lastTravelId } = this.state;
 
     return (
       <div>
@@ -164,6 +222,26 @@ export default class extends PureComponent {
         </Row>
 
         <Button type="primary" onClick={() => {this.createTravel()}} disabled={!enableTravel}>去旅行</Button>
+
+        <Button type="primary" onClick={() => {this.checkMyTravel()}}>我的旅程</Button>
+
+        {
+          lastTravelId ? (
+            <div>
+              <Modal
+                visible={unreadTravelVisible}
+                title="旅行回来噜"
+                closable={false}
+                footer={[]}
+              >
+                <p>经过了一段时间，终于旅行回来噜~</p>
+                <Button type="primary" onClick={() => {this.checkMyTravel()}} disabled={!enableTravel}>查看我的旅行</Button>
+              </Modal>
+            </div>
+          ) : null
+        }
+
+        <TravelHistory history={travelHistory} onClose={this.historyClose} visible={historyModalVisible} id={lastTravelId} />
       </div>
     );
   }

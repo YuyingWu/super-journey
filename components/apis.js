@@ -53,7 +53,7 @@ export const getRecords = async () => {
     
     return list;
   }).catch((error) => {
-    assert.isNotOk(error,'Promise error');
+    console.error(error, 'Promise error');
   });
 }
 
@@ -194,6 +194,7 @@ export const getTaskList = () => {
 
     return data;
   }, function (error) {
+    console.error(error, 'Promise error');
   });
 }
 
@@ -201,13 +202,15 @@ export const getGroupTaskList = async () => {
   const list = await getTaskList();
   let group = {};
 
-  list.map(item => {
-    if (!group[item.group]) {
-      group[item.group] = [];
-    }
+  if (list && list.length) {
+    list.map(item => {
+      if (!group[item.group]) {
+        group[item.group] = [];
+      }
 
-    group[item.group].push(item);
-  });
+      group[item.group].push(item);
+    });
+  }
 
   return group;
 }
@@ -226,7 +229,7 @@ export const getDestinationList = () => {
 
     return data;
   }).catch((error) => {
-    assert.isNotOk(error,'Promise error');
+    console.error(error, 'Promise error');
   });
 }
 
@@ -244,12 +247,63 @@ export const getMyDestination = async () => {
   return query.get(uid).then(user => {
     if (user.get('travel')) {
       return {
-        travel: LeanCloudResParser(user.get('travel'))
+        ...LeanCloudResParser(user.get('travel'))
       };
     }
 
     return {};
   }).catch((error) => {
-    assert.isNotOk(error,'Promise error');
+    console.error(error, 'Promise error');
+  });
+}
+
+// 获取旅行记录
+export const getTravelList = async () => {
+  const uid = await getUid();
+
+  if (uid === -1){
+    return;
+  }
+
+  const query = new AV.Query('Travel');
+  const User = AV.Object.createWithoutData('_User', uid);
+
+  query.equalTo('user', User);
+  query.include(['destination', 'objectId']);
+  query.descending('createdAt');
+
+  let list = [];
+
+  return query.find().then(results => {
+    if (results && results.length) {
+      results.map(r => {
+        const { endTime, startTime, status, destination } = r.attributes;
+        const des = LeanCloudResParser(destination);
+        const composed = {
+          destination: des,
+          endTime,
+          startTime,
+          status,
+          travelId: r.id
+        };
+
+        if (status !== 'new') {
+          list.push(composed);
+        }
+      });
+    }
+
+    return list;
+  }).catch((error) => {
+    console.error(error, 'Promise error');
+  });
+}
+
+export const setTravelStatus = async (id) => {
+  const Travel = AV.Object.createWithoutData('Travel', id);
+
+  Travel.set('status', 'archived');
+  Travel.save().then(() => {
+    console.log('set travel archived successfully!');
   });
 }
