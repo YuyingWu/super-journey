@@ -42,7 +42,7 @@ export default class extends PureComponent {
         <Carousel afterChange={this.onChange}>
           { history.map((h, hIndex) => (
             <div className="wgt-history" key={`history-${hIndex}`}>
-              <p>{ h.destination.name }</p>
+              <p>{ h.destination.name }：{ h.destination.content }</p>
             </div>
           ))}
           <div className="wgt-history" key={`history-last`}>
