@@ -287,9 +287,7 @@ export const getTravelList = async () => {
           travelId: r.id
         };
 
-        if (status !== 'new') {
-          list.push(composed);
-        }
+        list.push(composed);
       });
     }
 

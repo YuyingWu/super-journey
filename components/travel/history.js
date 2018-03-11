@@ -29,7 +29,13 @@ export default class extends PureComponent {
   }
 
   getHistory() {
-    const { history } = this.props;
+    const { history: oriHistory } = this.props;
+
+    if (!oriHistory || (oriHistory && !oriHistory.length)) {
+      return;
+    }
+
+    const history = oriHistory.filter(h => h.status !== 'new');
 
     if (history && history.length) {
       return (

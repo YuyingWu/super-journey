@@ -166,6 +166,8 @@ export default class extends PureComponent {
     if (travelHistory && travelHistory.length) {
       const lastTravel = travelHistory[0];
 
+      this.displayEndTime(lastTravel);
+
       if (lastTravel.status === 'timesup') {
         this.setState({
           unreadTravelVisible: true,
@@ -195,9 +197,20 @@ export default class extends PureComponent {
     })
   }
 
-  render() {
-    const { vehicles, myVehicle, garage, enableTravel, travelHistory, unreadTravelVisible, destination, historyModalVisible, lastTravelId } = this.state;
+  displayEndTime(destination) {
+    this.setState({
+      displayEndTime: moment().to(destination.endTime)
+    });
+    // if (!destination) {
+    //   return null;
+    // }
 
+    // return <p>旅行结束时间：{ moment().to(destination.endTime) }</p>
+  }
+
+  render() {
+    const { vehicles, myVehicle, garage, enableTravel, travelHistory, unreadTravelVisible, destination, historyModalVisible, lastTravelId, displayEndTime } = this.state;
+// console.log(travelHistory);
     return (
       <div>
         { garage && garage.length ? (
@@ -224,6 +237,10 @@ export default class extends PureComponent {
         <Button type="primary" onClick={() => {this.createTravel()}} disabled={!enableTravel}>去旅行</Button>
 
         <Button type="primary" onClick={() => {this.checkMyTravel()}}>我的旅程</Button>
+
+        { displayEndTime ? (
+          <p>旅行结束时间：{ displayEndTime }</p>
+        ) : null }
 
         {
           lastTravelId ? (
