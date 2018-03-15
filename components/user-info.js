@@ -1,8 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Progress } from 'antd';
-import { getUser, getScore, getUserLevel } from './apis';
+import mobxReact, { observer } from 'mobx-react';
+import { getUserLevel } from './apis';
 
-export default class extends PureComponent {
+@observer
+export default class extends Component {
   constructor(props) {
     super(props);
 
@@ -15,42 +17,77 @@ export default class extends PureComponent {
       levelPhysical: 100,
       levelWisdom: 100,
     }
+
+    this.updateUserData = this.updateUserData.bind(this);
   }
 
-  componentWillMount() {
-    this.fetchUserData();
-    this.fetchUserScore();
+  // componentWillReceiveProps(nextProps) {
+  //   const {
+  //     username: nextUname,
+  //     physical: nextP,
+  //     wisdom: nextW,
+  //     mileage: nextM
+  //   } = nextProps;
+
+  //   const {
+  //     username,
+  //     physical,
+  //     wisdom,
+  //     mileage
+  //   } = this.props;
+
+  //   if (username !== nextUname || physical !== nextP || wisdom !== nextW || mileage !== nextM) {
+  //     console.log('props update')
+  //     this.updateUserData(nextProps);
+  //   }
+  // }
+
+  componentDidMount() {
+    this.updateUserData(this.props);
+  }
+
+  updateUserData(props) {
     this.fetchUserLevel();
-  }
 
-  async fetchUserData () {
-    const user = await getUser();
-    const { username } = user;
-
-    this.setState({
-      username,
-    });
-  }
-
-  async fetchUserScore() {
-    const { physical, wisdom, mileage } = await getScore();
+    const { userstore } = props;
+    const { physical, wisdom, mileage, username } = userstore.user;
 
     this.setState({
       physical,
       wisdom,
       mileage,
+      username
     });
   }
 
+  // async fetchUserData () {
+  //   const user = await getUser();
+  //   const { username } = user;
+
+  //   this.setState({
+  //     username,
+  //   });
+  // }
+
+  // async fetchUserScore() {
+  //   const { physical, wisdom, mileage } = await getScore();
+
+  //   this.setState({
+  //     physical,
+  //     wisdom,
+  //     mileage,
+  //   });
+  // }
+
   async fetchUserLevel() {
     const {
-      level,
+      // level,
       physical: levelPhysical,
       wisdom: levelWisdom
     } = await getUserLevel();
 
     this.setState({
-      level,
+      // level,
       levelPhysical,
       levelWisdom
     });

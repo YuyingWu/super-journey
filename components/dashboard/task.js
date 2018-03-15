@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Button, List, message, Row, Col, Select } from 'antd';
 import AV from '../leancloud';
 import { LeanCloudResParser } from '../utils';
@@ -6,7 +6,11 @@ import { getUid, getRecords, getTaskList, getGroupTaskList, setVehicle } from '.
 const moment = require('moment');
 const Option = Select.Option;
 
-export default class extends PureComponent {
+import mobxReact, { observer } from 'mobx-react';
+import { UserStore } from '../../stores/user';
+
+@observer
+export default class extends Component {
   constructor(props) {
     super(props);
 
@@ -14,13 +18,15 @@ export default class extends PureComponent {
       tasks: [],
       uid: '',
       records: [],
-      groupTasks: {}
+      groupTasks: {},
+      activeTaskId: ''
     }
 
     this.renderTask = this.renderTask.bind(this);
     this.claimTask = this.claimTask.bind(this);
     this.fetchGameLog = this.fetchGameLog.bind(this);
     this.fetchTaskList = this.fetchTaskList.bind(this);
+    this.selectChange = this.selectChange.bind(this);
   }
 
   componentWillMount() {
@@ -66,8 +72,19 @@ export default class extends PureComponent {
     }
   }
 
-  claimTask(id) {
-    const { tasks } = this.state;
+  claimTask() {
+    const { tasks, activeTaskId: id } = this.state;
+
+    UserStore.setUsers({
+      username: '111'
+    });
+
+    return;
+
+    if (!id) {
+      return;
+    }
+
     const task = tasks.find(t => t.id === id);
     const { uid } = this.state;
     const User = AV.Object.createWithoutData('_User', uid);
@@ -84,14 +101,21 @@ export default class extends PureComponent {
         this.setState({
           records: [Object.assign(task, {
             createdAt: moment()
-          }), ...this.state.records]
+          }), ...this.state.records],
+          activeTaskId: ''
         })
       }
     });
   }
 
+  selectChange(id) {
+    this.setState({
+      activeTaskId: id
+    });
+  }
+
   renderTask() {
-    const { groupTasks } = this.state;
+    const { groupTasks, activeTaskId } = this.state;
     const keys = Object.keys(groupTasks) || [];
     let groupArray = [];
 
@@ -119,13 +143,20 @@ export default class extends PureComponent {
               }}>
                 <h1>{item.key}</h1><br/>
 
-                <Select defaultValue="请选择" style={{ width: 240 }} onChange={this.claimTask}>
+                <Select defaultValue="请选择" style={{ width: 240 }} onChange={this.selectChange}>
                   { item && item.list && item.list.map(task => (
                     <Option value={task.id} key={`select-${task.id}`}>{ task.name }（{ task.physical ? `体力值 +${task.physical} ` : null}
                     { task.wisdom ? `精神值 +${task.wisdom} ` : null}
                     { task.mileage ? `里程 +${task.mileage}` : null}）</Option>
                   ))}
                 </Select>
+                
+                { activeTaskId ? (
+                  <Button type="primary" onClick={this.claimTask}>确认</Button>
+                ) : (
+                  <Button type="primary" disabled>确认</Button>
+                ) }
+                
               </div>
             </List.Item>
           )}

@@ -1,12 +1,15 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Menu, Row, Col } from 'antd';
+import mobxReact, { observer } from 'mobx-react';
 import Task from './task';
 import Travel from './travel';
 import UserInfo from '../user-info';
+import { UserStore } from '../../stores/user';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-export default class extends PureComponent {
+@observer
+export default class extends Component {
   constructor(props) {
     super(props);
 
@@ -53,7 +56,7 @@ export default class extends PureComponent {
         `}</style>
         <Row>
           <Col lg={4} md={12} xs={24}>
-            <UserInfo />
+            <UserInfo userstore={UserStore} />
           </Col>
           <Col lg={20} md={12} xs={24}>
             <div>

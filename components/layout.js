@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import Footer from './footer';
-import { TestStore } from '../stores/test';
+// import { TestStore } from '../stores/test';
 
 export default class extends Component {
   render() {
     const { children } = this.props;
     const childrenWithProps = React.Children.map(children, child =>
-      React.cloneElement(child, { store: TestStore }));
+      React.cloneElement(child, {
+      //  store: TestStore
+      }));
 
     return (
       <div>

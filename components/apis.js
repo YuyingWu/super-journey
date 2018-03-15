@@ -121,6 +121,24 @@ export const getUserLevel = async () => {
   });
 }
 
+export const setUserData = async obj => {
+  const uid = await getUid();
+
+  if (uid === -1){
+    return;
+  }
+
+  const User = AV.Object.createWithoutData('_User', uid);
+
+  for (let key in obj) {
+    User.set(`${key}`, obj[key]);
+  }
+
+  User.save().then(() => {
+    console.log('set user data successfully!');
+  });
+}
+
 // 设置当前交通工具
 export const setVehicle = async (vehicle) => {
   const uid = await getUid();
