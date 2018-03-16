@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+// import DevTools from 'mobx-react-devtools';
 import Footer from './footer';
 // import { TestStore } from '../stores/test';
 
@@ -43,6 +44,8 @@ export default class extends Component {
         <main className="container">
           {childrenWithProps}
         </main>
+
+        { /* <DevTools /> */ }
       </div>
     );
   }

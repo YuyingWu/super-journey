@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Row, Col } from 'antd';
+// import mobx, { observable, action, computed, autorun, reaction } from 'mobx';
 import mobxReact, { observer } from 'mobx-react';
 import Task from './task';
 import Travel from './travel';
@@ -14,7 +15,7 @@ export default class extends Component {
     super(props);
 
     this.state = {
-      tab: 'task',
+      tab: 'task'
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -38,7 +39,7 @@ export default class extends Component {
         content = <Travel />;
         break;
       default:
-        content = <Task />;
+        content = <Task userstore={UserStore} />;
     }
 
     return content;
@@ -54,6 +55,7 @@ export default class extends Component {
             margin-bottom: 10px;
           }
         `}</style>
+
         <Row>
           <Col lg={4} md={12} xs={24}>
             <UserInfo userstore={UserStore} />

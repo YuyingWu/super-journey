@@ -12,6 +12,22 @@ export const getUser = () => {
   return -1;
 }
 
+export const queryUser = async () => {
+  const uid = await getUid();
+
+  if (uid == -1) {
+    return;
+  }
+
+  const query = new AV.Query('_User');
+
+  query.equalTo('objectId', uid);
+
+  return query.find().then(results => {
+    return LeanCloudResParser(results[0]);
+  });
+}
+
 // 获取用户id
 export const getUid = () => {
   const currentUser = AV.User.current();
@@ -121,7 +137,7 @@ export const getUserLevel = async () => {
   });
 }
 
-export const setUserData = async obj => {
+export const setUserData = async (obj, callback) => {
   const uid = await getUid();
 
   if (uid === -1){
@@ -135,7 +151,9 @@ export const setUserData = async obj => {
   }
 
   User.save().then(() => {
-    console.log('set user data successfully!');
+    console.log('set user data successfully!' + JSON.stringify(obj));
+
+    callback && callback();
   });
 }
 

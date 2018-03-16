@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Button, List, message, Row, Col, Select } from 'antd';
+import mobx, { observable, action, computed, autorun, reaction } from 'mobx';
+import mobxReact, { observer } from 'mobx-react';
 import AV from '../leancloud';
 import { LeanCloudResParser } from '../utils';
-import { getUid, getRecords, getTaskList, getGroupTaskList, setVehicle } from '../apis';
+import { getUid, getRecords, getTaskList, getGroupTaskList, setVehicle, setUserData } from '../apis';
 const moment = require('moment');
 const Option = Select.Option;
-
-import mobxReact, { observer } from 'mobx-react';
-import { UserStore } from '../../stores/user';
+// import { UserStore } from '../../stores/user';
 
 @observer
 export default class extends Component {
@@ -75,21 +75,16 @@ export default class extends Component {
   claimTask() {
     const { tasks, activeTaskId: id } = this.state;
 
-    UserStore.setUsers({
-      username: '111'
-    });
-
-    return;
-
     if (!id) {
       return;
     }
 
     const task = tasks.find(t => t.id === id);
+    const { mileage, physical, wisdom } = task;
+    const { mileage: uMile, physical: uPhy, wisdom: uWis } = this.props.userstore.user;
     const { uid } = this.state;
     const User = AV.Object.createWithoutData('_User', uid);
     const Task = AV.Object.createWithoutData('Task', task.id);
-
     const Game = new AV.Object('Game');// 构建 Comment 对象
     Game.set('user', User);
     Game.set('task', Task);
@@ -97,6 +92,12 @@ export default class extends Component {
     Game.save().then(results => {
       if (results) {
         message.info('提交成功');
+
+        setUserData({
+          mileage: mileage + uMile,
+          physical: physical + uPhy,
+          wisdom: wisdom + uWis
+        }, this.props.userstore.fetchUserData);
 
         this.setState({
           records: [Object.assign(task, {
